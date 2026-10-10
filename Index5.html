@@ -1,0 +1,325 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kado Ulang Tahun 🎁</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #180c30, #54215c, #a52f70);
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 35px 15px;
+}
+
+h1 {
+    font-size: 38px;
+    color: #ffd4e6;
+}
+
+.subtitle {
+    line-height: 1.6;
+    color: #f4e5ff;
+}
+
+.gift-area {
+    margin: 80px auto 30px;
+    width: 190px;
+    height: 160px;
+    position: relative;
+    cursor: pointer;
+}
+
+.gift-box {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 170px;
+    height: 110px;
+    background: #ff4387;
+    border-radius: 6px;
+}
+
+.gift-box::before {
+    content: "";
+    position: absolute;
+    left: 70px;
+    width: 30px;
+    height: 100%;
+    background: #ffd166;
+}
+
+.gift-lid {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 190px;
+    height: 35px;
+    background: #ff78a9;
+    border-radius: 6px;
+    transition: 0.8s;
+    z-index: 2;
+}
+
+.gift-lid::before {
+    content: "";
+    position: absolute;
+    left: 80px;
+    width: 30px;
+    height: 100%;
+    background: #ffd166;
+}
+
+.bow {
+    position: absolute;
+    top: 0;
+    left: 65px;
+    font-size: 38px;
+    z-index: 3;
+    transition: 0.8s;
+}
+
+.gift-area.open .gift-lid {
+    transform: translate(-15px, -80px) rotate(-25deg);
+}
+
+.gift-area.open .bow {
+    transform: translate(-20px, -80px) rotate(-25deg);
+}
+
+.gift-area:hover {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+    50% { transform: translateY(-10px); }
+}
+
+.hint {
+    color: #ffe1ef;
+}
+
+.card {
+    display: none;
+    max-width: 480px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 20px;
+    background: #fff7fb;
+    color: #54214d;
+    box-shadow: 0 10px 35px #0005;
+    animation: appear 0.8s ease;
+}
+
+.card.show {
+    display: block;
+}
+
+.card h2 {
+    color: #d63384;
+}
+
+.card p {
+    line-height: 1.8;
+}
+
+button {
+    margin: 6px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    background: #ed4388;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c9276a;
+}
+
+.confetti {
+    position: fixed;
+    top: -15px;
+    width: 9px;
+    height: 14px;
+    z-index: 10;
+    pointer-events: none;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    margin-top: 35px;
+    color: #e7c8ef;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎉 Happy Birthday! 🎂</h1>
+
+    <p class="subtitle">
+        Ada kejutan spesial untukmu.<br>
+        Klik kotak kado untuk membukanya!
+    </p>
+
+    <div class="gift-area" id="gift" role="button"
+         tabindex="0" aria-label="Buka kado">
+        <div class="bow">🎀</div>
+        <div class="gift-lid"></div>
+        <div class="gift-box"></div>
+    </div>
+
+    <p class="hint" id="hint">
+        👆 Tekan kado di atas
+    </p>
+
+    <div class="card" id="card">
+        <div style="font-size:50px">🎂💖🎁</div>
+
+        <h2>
+            Selamat Ulang Tahun,
+            <span id="nama">Sahabatku</span>!
+        </h2>
+
+        <p>
+            Semoga panjang umur, sehat selalu,
+            dimudahkan segala urusannya, dan
+            semua impianmu dapat tercapai.
+        </p>
+
+        <p>
+            Semoga setiap hari membawa kebahagiaan,
+            kesuksesan, dan banyak alasan untuk tersenyum.
+            Tetap semangat dan jangan pernah menyerah!
+        </p>
+
+        <h3>✨ Wish You All The Best! ✨</h3>
+
+        <p>
+            Dari: <strong id="pengirim">Seseorang yang peduli aldiano</strong> 💌
+        </p>
+
+        <button onclick="rayakan()">🎊 Rayakan Lagi</button>
+        <button onclick="gantiNama()">✏️ Ganti Nama</button>
+    </div>
+
+    <footer>
+        Dibuat dengan ❤️ khusus untuk hari istimewa
+    </footer>
+</div>
+
+<script>
+const gift = document.getElementById("gift");
+const card = document.getElementById("card");
+const hint = document.getElementById("hint");
+
+let sudahDibuka = false;
+
+function bukaKado() {
+    if (sudahDibuka) return;
+
+    sudahDibuka = true;
+    gift.classList.add("open");
+    card.classList.add("show");
+    hint.textContent = "🎉 Kejutanmu berhasil dibuka!";
+
+    rayakan();
+
+    setTimeout(() => {
+        card.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }, 300);
+}
+
+gift.addEventListener("click", bukaKado);
+
+gift.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        bukaKado();
+    }
+});
+
+function rayakan() {
+    const warna = [
+        "#ff4387",
+        "#ffd166",
+        "#ffffff",
+        "#a78bfa",
+        "#7cf5d2"
+    ];
+
+    for (let i = 0; i < 80; i++) {
+        const kertas = document.createElement("div");
+
+        kertas.className = "confetti";
+        kertas.style.left = Math.random() * 100 + "vw";
+        kertas.style.background =
+            warna[Math.floor(Math.random() * warna.length)];
+
+        kertas.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(kertas);
+
+        setTimeout(() => kertas.remove(), 5000);
+    }
+}
+
+function gantiNama() {
+    const nama = prompt("Nama orang yang berulang tahun:");
+
+    if (nama && nama.trim()) {
+        document.getElementById("nama").textContent =
+            nama.trim();
+    }
+
+    const pengirim = prompt("Ucapan dari siapa?");
+
+    if (pengirim && pengirim.trim()) {
+        document.getElementById("pengirim").textContent =
+            pengirim.trim();
+    }
+}
+</script>
+
+</body>
+</html>
+```
