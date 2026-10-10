@@ -1,0 +1,1002 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALDIANO | VIP Calculator</title>
+
+<style>
+:root {
+  --gold: #f8d879;
+  --gold2: #b98728;
+  --bg: #070707;
+  --panel: #111111;
+  --white: #f8f7f2;
+  --muted: #999999;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 0%, #443217 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 100%, #251b0b 0%, transparent 35%),
+    var(--bg);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 22px;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.crown {
+  font-size: 29px;
+  filter: drop-shadow(0 0 10px #f8d87977);
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-links button,
+.theme-btn {
+  background: transparent;
+  border: none;
+  color: #bdbdbd;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 10px 0;
+}
+
+.nav-links button:hover,
+.nav-links button.active {
+  color: var(--gold);
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.hero .emblem {
+  font-size: 48px;
+  color: var(--gold);
+  text-shadow: 0 0 25px #f8d87977;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 60px);
+  letter-spacing: clamp(3px, 1vw, 10px);
+  font-weight: 900;
+  background: linear-gradient(
+    180deg, #fff8d9, #e9bd54 48%, #96671b
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 5px 15px #b8872833);
+}
+
+.hero p {
+  margin-top: 12px;
+  color: #c6c0b1;
+  letter-spacing: 5px;
+  font-size: 11px;
+}
+
+.signature {
+  margin-top: 16px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 34px;
+  color: var(--gold);
+}
+
+.layout {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 220px minmax(300px, 500px) 250px;
+  justify-content: center;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.panel {
+  border: 1px solid #78602c;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #171717ed, #080808f5);
+  box-shadow: 0 15px 45px #0009, inset 0 1px #ffffff0a;
+  overflow: hidden;
+}
+
+.profile {
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 95px;
+  height: 95px;
+  margin: 5px auto 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  color: var(--gold);
+  background: radial-gradient(circle, #46351a, #0b0b0b);
+  border: 2px solid var(--gold2);
+  box-shadow: 0 0 25px #e8bd4d22;
+}
+
+.profile h2 {
+  text-align: center;
+  letter-spacing: 5px;
+  color: var(--gold);
+  font-size: 17px;
+}
+
+.quote {
+  color: #aaa18e;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.menu {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.menu button {
+  text-align: left;
+  background: transparent;
+  color: #c9c9c9;
+  padding: 13px 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.menu button:hover,
+.menu button.active {
+  background: linear-gradient(90deg, #8b6826, #211b0d);
+  color: white;
+  border-color: #6c5120;
+}
+
+.profile-bottom {
+  margin-top: auto;
+  padding-top: 35px;
+  color: #a18a51;
+  font-size: 10px;
+  letter-spacing: 4px;
+  line-height: 2.5;
+}
+
+.calculator {
+  padding: 20px;
+  border: 2px solid #a68134;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #252525, #090909 40%);
+  box-shadow:
+    0 0 0 5px #292014,
+    0 0 30px #d9a63e20,
+    0 25px 65px #000;
+  position: relative;
+}
+
+.calculator:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff1ad, transparent);
+  box-shadow: 0 0 15px var(--gold);
+}
+
+.calc-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  color: #b9b9b9;
+  padding: 5px 4px 16px;
+}
+
+.display {
+  min-height: 165px;
+  padding: 20px 17px;
+  border-radius: 20px;
+  border: 1px solid #78602c;
+  background:
+    linear-gradient(135deg, #151515d9, #080808ed),
+    #090909;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px #000;
+}
+
+.expression {
+  color: #9f9f9f;
+  min-height: 22px;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.screen {
+  margin-top: 15px;
+  color: var(--gold);
+  font-size: clamp(32px, 5vw, 47px);
+  font-weight: 300;
+  overflow-wrap: anywhere;
+  text-shadow: 0 0 20px #f8d87922;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.key {
+  height: 65px;
+  border: 1px solid #494949;
+  border-radius: 17px;
+  color: #f2f2f2;
+  background: linear-gradient(145deg, #333, #111 70%);
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: inset 0 1px #ffffff16, 0 5px 10px #0008;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+
+.key:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 18px #e5b94b25, inset 0 1px #fff2;
+}
+
+.key:active {
+  transform: scale(.94);
+}
+
+.key.fn {
+  color: var(--gold);
+  background: linear-gradient(145deg, #4a391a, #17130b);
+  border-color: #816328;
+}
+
+.key.op {
+  color: var(--gold);
+  font-size: 27px;
+}
+
+.key.equal {
+  background: linear-gradient(145deg, #fff0ac, #e3b84e 55%, #9e6b18);
+  color: #171006;
+  border-color: #ffed9c;
+  font-weight: 900;
+  box-shadow: 0 0 20px #f5d47733;
+}
+
+.key.zero {
+  grid-column: span 2;
+}
+
+.history-panel {
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3a3326;
+}
+
+.panel-heading h2 {
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.panel-heading button {
+  border: 0;
+  color: var(--gold);
+  background: transparent;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.history-list {
+  display: grid;
+  gap: 0;
+}
+
+.history-item {
+  padding: 14px 0;
+  border-bottom: 1px solid #ffffff19;
+}
+
+.history-expression {
+  font-size: 12px;
+  color: #dedede;
+  overflow-wrap: anywhere;
+}
+
+.history-result {
+  text-align: right;
+  color: var(--gold);
+  font-size: 14px;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+}
+
+.empty {
+  color: #888;
+  font-size: 12px;
+  padding: 20px 0;
+  line-height: 1.6;
+}
+
+.clear-history {
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.clear-history button {
+  width: 100%;
+  padding: 11px;
+  color: #c6c6c6;
+  border: 1px solid #51452b;
+  border-radius: 10px;
+  background: #111;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.clear-history button:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+footer {
+  max-width: 1200px;
+  margin: 45px auto 0;
+  padding: 20px 0;
+  border-top: 1px solid #6b5325;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  color: #a18d5b;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.footer-brand {
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 6px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  padding: 12px 20px;
+  background: #242016;
+  color: var(--gold);
+  border: 1px solid #8d6c2c;
+  border-radius: 12px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+  z-index: 5;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+body.light {
+  --bg: #eee9dc;
+  --panel: #fff;
+  --white: #191919;
+  color: #191919;
+  background: radial-gradient(circle at top, #f5d989, transparent 45%), #eae5d9;
+}
+
+body.light .panel,
+body.light .calculator {
+  background: linear-gradient(145deg, #fff, #e5dfd1);
+}
+
+body.light .display {
+  background: #f5f1e8;
+}
+
+body.light .key:not(.equal):not(.fn) {
+  background: linear-gradient(145deg, #fff, #ded8ca);
+  color: #191919;
+}
+
+body.light .history-expression {
+  color: #222;
+}
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 520px);
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .history-panel {
+    min-height: 0;
+  }
+
+  .clear-history {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 14px;
+  }
+
+  .navbar {
+    margin-bottom: 30px;
+  }
+
+  .brand {
+    font-size: 15px;
+    letter-spacing: 3px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links button {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .hero p {
+    letter-spacing: 2px;
+  }
+
+  .calculator {
+    padding: 14px;
+    border-radius: 23px;
+  }
+
+  .keys {
+    gap: 7px;
+  }
+
+  .key {
+    height: 56px;
+    border-radius: 13px;
+    font-size: 19px;
+  }
+
+  .display {
+    min-height: 140px;
+  }
+
+  footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <span class="crown">♛</span>
+    <span>ALDIANO</span>
+  </div>
+
+  <nav class="nav-links">
+    <button class="active" data-section="calculator">CALCULATOR</button>
+    <button data-section="history">HISTORY</button>
+    <button data-section="about">ABOUT</button>
+  </nav>
+
+  <button class="theme-btn" id="themeBtn" aria-label="Ganti tema">
+    ☼ THEME
+  </button>
+</header>
+
+<section class="hero">
+  <div class="emblem">♛</div>
+  <h1>VIP CALCULATOR</h1>
+  <p>PREMIUM • FAST • ACCURATE</p>
+  <div class="signature">Aldiano</div>
+</section>
+
+<main class="layout">
+
+  <aside class="panel profile">
+    <div class="avatar">♛</div>
+    <h2>ALDIANO</h2>
+
+    <p class="quote">
+      "Disiplin hari ini,<br>
+      kesuksesan nanti."
+    </p>
+
+    <nav class="menu">
+      <button class="active" data-section="calculator">▦ &nbsp; Kalkulator</button>
+      <button data-section="history">◷ &nbsp; Riwayat</button>
+      <button data-section="settings">⚙ &nbsp; Pengaturan</button>
+      <button data-section="about">ⓘ &nbsp; Tentang</button>
+    </nav>
+
+    <div class="profile-bottom">
+      DREAM<br>
+      PLAN<br>
+      DO<br>
+      REPEAT<br>
+      ♛
+    </div>
+  </aside>
+
+  <section class="calculator panel" id="calculator">
+    <div class="calc-top">
+      <span>◷ <span id="clock">00:00:00</span></span>
+      <span id="date">Tanggal</span>
+    </div>
+
+    <div class="display" aria-live="polite">
+      <div class="expression" id="expression">ALDIANO VIP MODE</div>
+      <div class="screen" id="screen">0</div>
+    </div>
+
+    <div class="keys">
+      <button class="key fn" data-action="clear">AC</button>
+      <button class="key fn" data-action="delete" aria-label="Hapus angka terakhir">⌫</button>
+      <button class="key fn" data-action="percent">%</button>
+      <button class="key op" data-op="/">÷</button>
+
+      <button class="key" data-number="7">7</button>
+      <button class="key" data-number="8">8</button>
+      <button class="key" data-number="9">9</button>
+      <button class="key op" data-op="*">×</button>
+
+      <button class="key" data-number="4">4</button>
+      <button class="key" data-number="5">5</button>
+      <button class="key" data-number="6">6</button>
+      <button class="key op" data-op="-">−</button>
+
+      <button class="key" data-number="1">1</button>
+      <button class="key" data-number="2">2</button>
+      <button class="key" data-number="3">3</button>
+      <button class="key op" data-op="+">+</button>
+
+      <button class="key zero" data-number="0">0</button>
+      <button class="key" data-action="decimal">,</button>
+      <button class="key equal" data-action="equals">=</button>
+    </div>
+  </section>
+
+  <aside class="panel history-panel" id="history">
+    <div class="panel-heading">
+      <h2>◷ RIWAYAT</h2>
+      <button id="clearHistory" aria-label="Hapus semua riwayat">▤ ×</button>
+    </div>
+
+    <div class="history-list" id="historyList">
+      <p class="empty">Belum ada perhitungan.<br>Mulai hitung sesuatu!</p>
+    </div>
+
+    <div class="clear-history">
+      <button id="clearHistoryText">⌫ Hapus Riwayat</button>
+    </div>
+  </aside>
+
+</main>
+
+<footer>
+  <span>✦ STAY FOCUSED</span>
+  <span class="footer-brand">ALDIANO</span>
+  <span>VIP ∞ PREMIUM</span>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const screen = document.getElementById("screen");
+const expression = document.getElementById("expression");
+const historyList = document.getElementById("historyList");
+const toast = document.getElementById("toast");
+
+let current = "0";
+let firstNumber = null;
+let operator = null;
+let shouldReset = false;
+let history = [];
+let lastExpression = "";
+
+const symbols = {
+  "+": "+",
+  "-": "−",
+  "*": "×",
+  "/": "÷"
+};
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+}
+
+function render() {
+  screen.textContent = current;
+}
+
+function formatNumber(number) {
+  if (!Number.isFinite(number)) return "Error";
+
+  const rounded = Number(number.toPrecision(12));
+  return String(rounded);
+}
+
+function inputNumber(number) {
+  if (current === "Error" || shouldReset) {
+    current = number;
+    shouldReset = false;
+  } else if (current === "0") {
+    current = number;
+  } else if (current.replace("-", "").length < 15) {
+    current += number;
+  }
+
+  render();
+}
+
+function inputDecimal() {
+  if (current === "Error" || shouldReset) {
+    current = "0.";
+    shouldReset = false;
+  } else if (!current.includes(".")) {
+    current += ".";
+  }
+
+  render();
+}
+
+function clearAll() {
+  current = "0";
+  firstNumber = null;
+  operator = null;
+  shouldReset = false;
+  lastExpression = "";
+  expression.textContent = "ALDIANO VIP MODE";
+  render();
+}
+
+function deleteLast() {
+  if (current === "Error" || shouldReset) {
+    current = "0";
+    shouldReset = false;
+  } else {
+    current = current.length > 1
+      ? current.slice(0, -1)
+      : "0";
+
+    if (current === "-") current = "0";
+  }
+
+  render();
+}
+
+function chooseOperator(op) {
+  if (current === "Error") return;
+
+  if (operator !== null && !shouldReset) {
+    calculate(false);
+    if (current === "Error") return;
+  }
+
+  firstNumber = Number(current);
+  operator = op;
+  shouldReset = true;
+
+  expression.textContent =
+    `${firstNumber} ${symbols[operator]}`;
+}
+
+function calculate(save = true) {
+  if (operator === null || firstNumber === null) return;
+
+  const a = firstNumber;
+  const b = Number(current);
+  const op = operator;
+  let result;
+
+  switch (op) {
+    case "+":
+      result = a + b;
+      break;
+    case "-":
+      result = a - b;
+      break;
+    case "*":
+      result = a * b;
+      break;
+    case "/":
+      result = b === 0 ? NaN : a / b;
+      break;
+    default:
+      return;
+  }
+
+  const line = `${a} ${symbols[op]} ${b}`;
+
+  firstNumber = null;
+  operator = null;
+  shouldReset = true;
+
+  if (!Number.isFinite(result)) {
+    current = "Error";
+    expression.textContent =
+      "Pembagian nol tidak diperbolehkan";
+    render();
+    return;
+  }
+
+  current = formatNumber(result);
+  lastExpression = line;
+
+  expression.textContent = line + " =";
+
+  if (save) {
+    history.unshift({
+      expression: line,
+      result: current,
+      time: new Date().toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit"
+      })
+    });
+
+    history = history.slice(0, 30);
+    renderHistory();
+  }
+
+  render();
+}
+
+function percentage() {
+  if (current === "Error") return;
+
+  current = formatNumber(Number(current) / 100);
+  render();
+}
+
+function renderHistory() {
+  historyList.replaceChildren();
+
+  if (history.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "empty";
+    empty.textContent = "Belum ada perhitungan.";
+    historyList.appendChild(empty);
+    return;
+  }
+
+  history.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "history-item";
+
+    const exp = document.createElement("div");
+    exp.className = "history-expression";
+    exp.textContent = item.expression;
+
+    const result = document.createElement("div");
+    result.className = "history-result";
+    result.textContent = "= " + item.result;
+
+    const time = document.createElement("div");
+    time.style.cssText =
+      "font-size:10px;color:#777;margin-top:6px";
+    time.textContent = item.time;
+
+    row.append(exp, result, time);
+    historyList.appendChild(row);
+  });
+}
+
+function clearHistory() {
+  history = [];
+  renderHistory();
+  showToast("Riwayat berhasil dihapus");
+}
+
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("id-ID", {
+      hour12: false
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+}
+
+document.querySelectorAll("[data-number]").forEach(button => {
+  button.addEventListener("click", () => {
+    inputNumber(button.dataset.number);
+  });
+});
+
+document.querySelectorAll("[data-op]").forEach(button => {
+  button.addEventListener("click", () => {
+    chooseOperator(button.dataset.op);
+  });
+});
+
+document.querySelectorAll("[data-action]").forEach(button => {
+  button.addEventListener("click", () => {
+    switch (button.dataset.action) {
+      case "clear":
+        clearAll();
+        break;
+      case "delete":
+        deleteLast();
+        break;
+      case "percent":
+        percentage();
+        break;
+      case "decimal":
+        inputDecimal();
+        break;
+      case "equals":
+        calculate(true);
+        break;
+    }
+  });
+});
+
+document.getElementById("clearHistory")
+  .addEventListener("click", clearHistory);
+
+document.getElementById("clearHistoryText")
+  .addEventListener("click", clearHistory);
+
+document.getElementById("themeBtn")
+  .addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    showToast(
+      document.body.classList.contains("light")
+        ? "Tema terang aktif"
+        : "Tema VIP gelap aktif"
+    );
+  });
+
+document.querySelectorAll("[data-section]")
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      const section = button.dataset.section;
+
+      if (section === "calculator") {
+        document.getElementById("calculator")
+          .scrollIntoView({ behavior: "smooth" });
+      } else if (section === "history") {
+        document.getElementById("history")
+          .scrollIntoView({ behavior: "smooth" });
+      } else if (section === "about") {
+        showToast("ALDIANO VIP Calculator • Premium Edition");
+      } else if (section === "settings") {
+        showToast("Gunakan tombol THEME untuk mengubah tema");
+      }
+    });
+  });
+
+document.addEventListener("keydown", event => {
+  if (/^\d$/.test(event.key)) {
+    inputNumber(event.key);
+  } else if (event.key === ".") {
+    inputDecimal();
+  } else if (event.key === "Backspace") {
+    deleteLast();
+  } else if (event.key === "Escape") {
+    clearAll();
+  } else if (event.key === "Enter" || event.key === "=") {
+    calculate(true);
+  } else if (["+", "-", "*", "/"].includes(event.key)) {
+    chooseOperator(event.key);
+  } else if (event.key === "%") {
+    percentage();
+  }
+});
+
+updateClock();
+setInterval(updateClock, 1000);
+renderHistory();
+</script>
+
+</body>
+</html>
+```
