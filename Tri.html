@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aku ada bunga untuk kamu 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#020a08;color:#fff;overflow:hidden;height:100vh;font-family:'Space Grotesk'}
+#stars{position:fixed;inset:0;z-index:1}
+#glow{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 80%, #2ef27d18, transparent 60%)}
+.wrap{position:relative;z-index:10;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:430px}
+.top a{text-decoration:none;color:#fff;font-size:13px;display:flex;align-items:center;gap:6px;opacity:.8}
+.btn-ig{border:1.5px solid #ff9d00;color:#ffb02e;padding:8px 14px;border-radius:12px;font-weight:700}
+h1{margin-top:60px;font-size:38px;text-align:center;text-shadow:0 0 20px #8ef3ff, 0 0 40px #2ef27d88;animation:glowTxt 2s infinite alternate;letter-spacing:1px}
+@keyframes glowTxt{0%{text-shadow:0 0 10px #8ef3ff}100%{text-shadow:0 0 30px #8ef3ff, 0 0 50px #2ef27d}}
+.flowers{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:68vh;pointer-events:none}
+.flower{position:absolute;bottom:0;transform-origin:bottom center;animation:sway 4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.stem{width:6px;background:linear-gradient(to top, #0a4a3a, #2ab896);border-radius:999px;box-shadow:0 0 10px #2ef27d88}
+.bloom{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:70px;height:70px;animation:bloom 2s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes bloom{0%{transform:translateX(-50%) scale(0) rotate(-20deg);opacity:0}100%{transform:translateX(-50%) scale(1) rotate(0);opacity:1}}
+.petal{position:absolute;width:28px;height:36px;background:radial-gradient(circle at 30% 30%, #c8ffec, #5ce0b8);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;box-shadow:0 0 12px #5ce0b8aa}
+.center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22px;height:12px;background:radial-gradient(circle, #fff9c4, #ffe066);border-radius:50%;box-shadow:0 0 12px #ffeb8a}
+.firefly{position:absolute;width:4px;height:4px;background:#ffe066;border-radius:50%;box-shadow:0 0 8px #ffe066, 0 0 16px #ffe066;animation:fly 6s linear infinite}
+@keyframes fly{0%{transform:translate(0,0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translate(100px,-120px);opacity:0}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div id="glow"></div>
+
+<div class="wrap">
+<div class="top"><a href="#" onclick="history.back()">← Kembali</a><a class="btn-ig" href="https://instagram.com">◎ Pesan Sekarang</a></div>
+<h1 id="txt">Aku ada bunga</h1>
+<p id="sub" style="margin-top:10px;opacity:.7;font-family:'Courier Prime';font-size:13px;text-align:center;min-height:40px"></p>
+<div class="flowers" id="flowers"></div>
+</div>
+
+<script>
+// bintang
+const c=document.getElementById('stars'),x=c.getContext('2d');function R(){c.width=innerWidth;c.height=innerHeight}R();addEventListener('resize',R);
+let S=[];for(let i=0;i<120;i++)S.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight*.7,r:Math.random()*1.2,s:Math.random()*0.8+0.2});
+(function L(){x.clearRect(0,0,c.width,c.height);S.forEach(s=>{x.fillStyle=`rgba(180,255,255,${s.s})`;x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);x.fill();s.y+=0.05;if(s.y>innerHeight)s.y=0});requestAnimationFrame(L)})();
+
+// bunga glow 3 biji kayak screenshot
+const box=document.getElementById('flowers');
+const pos=[{l:20,h:280,delay:0},{l:50,h:360,delay:0.4},{l:72,h:300,delay:0.8}];
+pos.forEach((p,i)=>{
+  const f=document.createElement('div');f.className='flower';
+  f.style.left=p.l+'%';f.style.bottom='0';f.style.animationDelay=i*0.6+'s';
+  f.innerHTML=`
+    <div style="position:relative;width:6px;height:${p.h}px;margin:0 auto">
+      <div class="stem" style="height:100%"></div>
+      <div class="bloom" style="animation-delay:${p.delay}s">
+        <div class="petal" style="transform:translate(-50%,-50%) rotate(0deg) translateY(-18px)"></div>
+        <div class="petal" style="transform:translate(-50%,-50%) rotate(72deg) translateY(-18px)"></div>
+        <div class="petal" style="transform:translate(-50%,-50%) rotate(144deg) translateY(-18px)"></div>
+        <div class="petal" style="transform:translate(-50%,-50%) rotate(216deg) translateY(-18px)"></div>
+        <div class="petal" style="transform:translate(-50%,-50%) rotate(288deg) translateY(-18px)"></div>
+        <div class="center"></div>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:2px">
+      ${Array(6).fill(0).map(()=>`<div style="width:10px;height:18px;background:#12382e;border-radius:50% 50% 0 0;transform:rotate(${Math.random()*40-20}deg)"></div>`).join('')}
+    </div>
+  `;
+  box.appendChild(f);
+});
+
+// kunang-kunang
+for(let i=0;i<18;i++){
+  const k=document.createElement('div');k.className='firefly';
+  k.style.left=Math.random()*100+'%';k.style.bottom=20+Math.random()*60+'%';
+  k.style.animationDelay=Math.random()*5+'s';k.style.animationDuration=4+Math.random()*4+'s';
+  document.body.appendChild(k);
+}
+
+// ketik animasi kayak di video
+const teks="Aku ada bunga untuk kamu 🌸";
+let idx=0;
+function type(){
+  if(idx<=teks.length){
+    document.getElementById('txt').textContent=teks.slice(0,idx);
+    idx++;setTimeout(type,90);
+  }else{
+    document.getElementById('sub').textContent="Bunga ini tidak akan layu, seperti rasa sayang ini... ✨\n— untuk kamu";
+    // tambah rumput bawah
+    for(let i=0;i<30;i++){
+      const g=document.createElement('div');
+      g.style.position='absolute';g.style.bottom='0';g.style.left=Math.random()*100+'%';
+      g.style.width='2px';g.style.height=(10+Math.random()*30)+'px';
+      g.style.background='#1a5a3a';g.style.borderRadius='999px';
+      g.style.boxShadow='0 0 6px #2ef27d66';
+      box.appendChild(g);
+    }
+  }
+}
+setTimeout(type,500);
+</script>
+</body>
+</html>
