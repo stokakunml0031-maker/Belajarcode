@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCGG 25 COMBO HD — ALDIANO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--line:rgba(255,255,255,.14);--gold:#FFD36A;--bg:#000}
+body{background:#000;color:#EDE8E2;font-family:Inter,sans-serif;overflow-x:hidden}
+.serif{font-family:'Bodoni Moda',serif}
+/* VIDEO TETAP HD JERNIH - GA DIRUSAK */
+#videoBg{position:fixed;inset:0;z-index:-6;width:100%;height:100%;object-fit:cover;filter:brightness(1.08) contrast(1.12) saturate(1.28);image-rendering:-webkit-optimize-contrast}
+.overlay{position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.12) 40%,rgba(0,0,0,.55) 100%)}
+.nav{position:sticky;top:0;z-index:50;padding:14px 5vw;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,14,.42);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.grid{padding:12px 5vw;display:grid;grid-template-columns:380px 1fr;gap:12px}
+.panel{border-radius:22px;background:linear-gradient(180deg,rgba(12,12,18,.72),rgba(8,8,12,.58));backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.14);padding:14px;box-shadow:0 20px 60px rgba(0,0,0,.7)}
+.combo{padding:11px;border-radius:14px;background:rgba(18,18,26,.92);border:1px solid var(--line);margin-bottom:7px;cursor:pointer;display:flex;gap:10px;align-items:center;transition:.25s}
+.combo:hover{border-color:rgba(255,211,106,.45);transform:translateY(-1px)}
+.combo.active{border-color:var(--gold);background:linear-gradient(90deg,rgba(255,211,106,.18),rgba(18,18,26,.92))}
+.combo img{width:44px;height:44px;border-radius:10px}
+.tag{padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-size:9px;font-weight:800}
+.tierS{background:linear-gradient(90deg,var(--gold),#C8A97A);color:#000}
+.tierSPlus{background:linear-gradient(90deg,#FFD36A,#FF8A3D);color:#000;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.board{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:10px}
+.cell{aspect-ratio:1;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.cell img{width:100%;height:100%;object-fit:cover}
+.search{width:100%;background:rgba(255,255,255,.07);border:1px solid var(--line);padding:10px 12px;border-radius:12px;color:#fff;outline:none;margin-bottom:8px;font-size:13px}
+.btn{background:linear-gradient(90deg,#fff,#EADDC3);color:#000;padding:10px 14px;border-radius:999px;font-weight:800;font-size:11px;border:none;cursor:pointer}
+.btn2{background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff}
+.upload{border:1.5px dashed rgba(255,211,106,.4);border-radius:12px;padding:10px;text-align:center;background:rgba(255,211,106,.08);cursor:pointer;margin-bottom:8px;font-size:12px}
+#watermark{position:fixed;right:14px;bottom:76px;z-index:55;display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(16px);border:1px solid rgba(255,211,106,.3);font-size:10px}
+#controls{position:fixed;left:12px;bottom:12px;z-index:60;display:flex;gap:6px}
+.ctrl{padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.6);border:1px solid var(--line);color:#fff;font-size:10px;font-weight:700;cursor:pointer}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<video id="videoBg" autoplay muted loop playsinline>
+<source src="gameplay.mp4" type="video/mp4">
+<source src="https://videos.pexels.com/video-files/18069234/18069234-uhd_1440_1440_24fps.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+<audio id="bgMusic" loop src="https://cdn.pixabay.com/audio/2022/10/30/audio_8a08a6a5d0.mp3"></audio>
+<div id="watermark"><img src="https://ui-avatars.com/api/?name=ALDIANO&background=FFD36A&color=000" style="width:22px;height:22px;border-radius:50%"><b id="wmText">ALDIANO • 25 COMBO HD</b></div>
+<div id="controls">
+<button class="ctrl" onclick="toggleHD()" id="hdBtn">🔆 HD ON</button>
+<button class="ctrl" onclick="toggleMusic()">🎵</button>
+</div>
+
+<div class="nav">
+<div class="serif" style="font-size:17px">MCGG<span style="color:var(--gold)"> 25 COMBO HD</span> <small style="font-size:8px;opacity:.5">VIDEO GA RUSAK</small></div>
+<div style="display:flex;gap:6px"><button class="btn" style="padding:6px 10px" onclick="showFav()">⭐ (<span id="favCount">0</span>)</button><button class="btn btn2" style="padding:6px 10px" onclick="exportPNG()">📸 HD</button></div>
+</div>
+
+<div class="grid">
+<div class="panel">
+<div class="upload" onclick="document.getElementById('videoInput').click()">📹 GANTI VIDEO BACKGROUND (HD TETAP)</div>
+<input id="videoInput" type="file" accept="video/*" style="display:none">
+<input id="search" class="search" placeholder="Cari 25 combo: Astro, Nature, Weapon, MM...">
+<div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+<button class="tag" onclick="filterTag('Astro')">Astro</button>
+<button class="tag" onclick="filterTag('Nature')">Nature</button>
+<button class="tag" onclick="filterTag('Weapon')">Weapon</button>
+<button class="tag" onclick="filterTag('MM')">MM</button>
+<button class="tag" onclick="filterTag('S+')">S+</button>
+<button class="tag" onclick="search.value='';render()">All</button>
+</div>
+<div id="list" style="max-height:62vh;overflow:auto"></div>
+</div>
+<div class="panel">
+<div id="capture"><div id="detail"><div style="text-align:center;padding:24px 14px"><h2 class="serif" style="font-size:24px">25 COMBO META<br><span style="color:var(--gold)">VIDEO TETAP HD JERNIH</span></h2><p style="opacity:.6;margin-top:6px;font-size:12px">Video ga aku gelapin lagi — brightness 108%, saturasi 128% — Granger SAVAGE kamu tetap jelas</p><div style="margin-top:10px;padding:8px;border-radius:10px;background:rgba(255,211,106,.1);border:1px solid rgba(255,211,106,.2);font-size:11px">💡 Filter di kiri atas: klik Astro / Nature / Weapon / MM buat cari combo cepat</div></div></div></div>
+<div style="margin-top:10px;display:flex;gap:8px"><button class="btn" onclick="exportPNG()">📸 EXPORT HD + WATERMARK</button><button class="btn btn2" onclick="shareWA()">WA</button></div>
+<div id="preview" style="margin-top:10px"></div>
+</div>
+</div>
+
+<script>
+const combos=[
+{name:'6 Astro + 4 Weapon Master [GRANGER CORE]',tier:'S+',heroes:['Granger','Zhask','Kagura','Aurora','Layla','Zilong','Martis','Alucard'],commander:'Kaboom / Brown',items:'BOD + Brute Force + Malefic',pos:[1,2,3,9,10,11,18,19],desc:'Build SAVAGE kayak video kamu'},
+{name:'6 Weapon + 4 Abyss [MANIAC BUILD]',tier:'S+',heroes:['Granger','Gusion','Martis','Lancelot','Karina','Alice','Dyrroth','Selena'],commander:'Saki',items:'War Axe + Endless + BOD',pos:[1,2,9,10,17,18,25,26],desc:'Assassin burst MANIAC'},
+{name:'6 Marksman + 3 Los Pecados [SAVAGE MM]',tier:'S+',heroes:['Granger','Clint','Bruno','Wanwan','Lesley','Brody','Beatrix','Miya'],commander:'Buss 3',items:'Malefic + DHS + BOD',pos:[3,4,5,11,12,13,19,20],desc:'MM late game 1 hit'},
+{name:'6 Nature Spirit + 4 Wrestler [TANK HEAL]',tier:'S',heroes:['Belerick','Hylos','Grock','Gatot','Badang','Chou','Wanwan','Lolita'],commander:'Remy / Abe',items:'Dominance + Oracle + Guardian',pos:[0,1,2,8,9,10,16,17],desc:'Heal deras + stun'},
+{name:'6 Dauntless + 3 Northern Vale [FREYA HYPER]',tier:'S',heroes:['Freya','Atlas','Minsitthar','Balmond','Aurora','Lapu','Bane','Franco'],commander:'Tharz 3',items:'BOD + Berserker + War Axe',pos:[2,3,4,5,11,12,13,20],desc:'Freya carry shield tebal'},
+{name:'6 Elementalist + 4 Mage [SPAM SKILL]',tier:'S',heroes:['Gord','Aurora','Valir','Lylia','Chang e','Eudora','Luo Yi','Kagura'],commander:'Yuki',items:'Lightning Truncheon + Holy Crystal + Glowing Wand',pos:[0,7,8,15,16,23,24,31],desc:'Spam skill nonstop'},
+{name:'6 Weapon Master + 4 Astro FLEX',tier:'S+',heroes:['Zhask','Martis','Aurora','Franco','Alucard','Freya','Layla','Zilong'],commander:'Kaboom FLEX',items:'Flex BOD + Golden Staff',pos:[1,2,10,11,18,19,26,27],desc:'FLEX aman push Mythic'},
+{name:'6 Nature + 6 Dauntless [HYPER TANK LVL9]',tier:'S+',heroes:['Belerick','Hylos','Grock','Atlas','Freya','Balmond','Gatot','Badang','Chou'],commander:'Remy 3',items:'Full Tank + Oracle',pos:[0,1,2,3,8,9,10,11,16],desc:'Auto juara 1 tank keras'},
+{name:'6 Abyss + 4 Weapon [VAMPIR BURST]',tier:'S',heroes:['Dyrroth','Alice','Selena','Karina','Martis','Alucard','Lancelot','Gusion'],commander:'Saki',items:'Concentrated Energy + War Axe',pos:[0,1,8,9,16,17,24,25],desc:'Lifesteal + burst'},
+{name:'6 Los Pecados + 4 MM [POJOK META]',tier:'A+',heroes:['Wanwan','Clint','Bruno','Miya','Lesley','Brody','Beatrix','Ixia'],commander:'Buss',items:'DHS + Golden Staff + Malefic',pos:[3,4,5,11,12,13,19,20],desc:'MM pojok anti assassin'},
+{name:'6 Astro + 4 Mage [ZHASK CARRY]',tier:'S+',heroes:['Zhask','Kagura','Aurora','Layla','Lylia','Eudora','Luo Yi','Gord'],commander:'Kaboom',items:'Feather of Heaven + Golden Staff + Concentrated',pos:[1,2,3,9,10,11,18,19],desc:'Zhask bintang jatuh OP'},
+{name:'6 Wrestler + 4 Nature + 2 Dauntless',tier:'S',heroes:['Chou','Badang','Wanwan','Gatot','Belerick','Hylos','Grock','Freya'],commander:'Abe',items:'Dominance + Brute Force',pos:[0,1,8,9,16,17,24,25],desc:'Stun lock + heal'},
+{name:'6 Northern Vale + 4 Dauntless [AURORA FREEZE]',tier:'S',heroes:['Aurora','Franco','Bane','Lapu','Atlas','Freya','Minsitthar','Balmond'],commander:'Tharz 3',items:'Holy Crystal + Lightning + Blood Wings',pos:[2,3,10,11,18,19,26,27],desc:'Freeze + shield'},
+{name:'6 Mage + 4 Elementalist + 2 Astro',tier:'A+',heroes:['Valir','Lylia','Eudora','Gord','Aurora','Luo Yi','Zhask','Kagura'],commander:'Yuki',items:'Necklace of Durance + Glowing Wand',pos:[0,1,2,3,8,9,10,11],desc:'Burn + CC'},
+{name:'6 Weapon Master + 4 Dauntless [MARTIS SPIN]',tier:'S',heroes:['Martis','Alucard','Gusion','Freya','Atlas','Balmond','Minsitthar','Lancelot'],commander:'Brown',items:'BOD + War Axe + Berserker',pos:[1,2,9,10,17,18,25,26],desc:'Martis putar anti CC'},
+{name:'6 Marksman + 4 Weapon + 2 Los Pecados',tier:'S+',heroes:['Granger','Clint','Bruno','Wanwan','Alucard','Martis','Lesley','Brody'],commander:'Buss 3',items:'BOD + Malefic + DHS',pos:[3,4,11,12,19,20,27,28],desc:'MM + Weapon hybrid'},
+{name:'6 Abyss + 3 Weapon + 3 Astro [SELENA STUN]',tier:'S',heroes:['Selena','Dyrroth','Alice','Karina','Martis','Alucard','Zhask','Kagura'],commander:'Saki',items:'Concentrated + Lightning',pos:[0,1,9,10,18,19,26,27],desc:'Stun 3 detik + burst'},
+{name:'6 Dauntless + 4 Wrestler + 2 Nature',tier:'S',heroes:['Freya','Atlas','Minsitthar','Balmond','Chou','Badang','Belerick','Hylos'],commander:'Tharz',items:'War Axe + Brute Force + Guardian',pos:[0,1,2,8,9,10,16,17],desc:'Shield + heal + stun'},
+{name:'6 Astro + 6 Weapon [HYPER LVL9]',tier:'S+',heroes:['Zhask','Kagura','Aurora','Layla','Zilong','Martis','Alucard','Gusion','Lancelot'],commander:'Kaboom 3',items:'Golden Staff + Feather + BOD',pos:[1,2,3,4,9,10,11,12,19],desc:'Hyper Astro Weapon lvl 9'},
+{name:'4 Astro + 4 Weapon + 4 Dauntless [BALANCE]',tier:'S+',heroes:['Zhask','Martis','Freya','Atlas','Alucard','Layla','Zilong','Aurora'],commander:'Brown FLEX',items:'Flex item',pos:[1,2,10,11,18,19,26,27],desc:'Balance aman'},
+{name:'6 Nature Spirit + 3 Wrestler + 3 Dauntless',tier:'S',heroes:['Belerick','Hylos','Grock','Gatot','Chou','Badang','Atlas','Freya'],commander:'Remy',items:'Cursed Helmet + Oracle',pos:[0,1,2,8,9,10,16,17],desc:'Tank regen'},
+{name:'6 Los Pecados + 4 Abyss [VAMPIR MM]',tier:'A+',heroes:['Wanwan','Clint','Lesley','Dyrroth','Alice','Selena','Karina','Miya'],commander:'Buss',items:'DHS + Concentrated',pos:[3,4,11,12,19,20,27,28],desc:'MM lifesteal'},
+{name:'6 Elementalist + 3 Northern + 3 Mage',tier:'S',heroes:['Gord','Aurora','Valir','Luo Yi','Lapu','Franco','Eudora','Lylia'],commander:'Yuki',items:'Holy Crystal + Lightning',pos:[0,7,8,15,16,23,24,31],desc:'Freeze + burn'},
+{name:'6 Weapon Master + 4 Northern [LAPU CARRY]',tier:'S',heroes:['Lapu','Bane','Franco','Aurora','Martis','Alucard','Freya','Atlas'],commander:'Brown',items:'BOD + War Axe',pos:[2,3,10,11,18,19,26,27],desc:'Lapu skill sakit'},
+{name:'6 MM + 6 Los Pecados HYPER [BRUNO ONE SHOT]',tier:'S+',heroes:['Bruno','Clint','Wanwan','Miya','Lesley','Brody','Beatrix','Ixia','Granger'],commander:'Buss 3',items:'BOD + Malefic + Berserker',pos:[3,4,5,11,12,13,19,20,27],desc:'Bruno one shot SAVAGE'},
+];
+
+let fav=JSON.parse(localStorage.getItem('mcgg_fav')||'[]'), active=null;
+const list=document.getElementById('list'), detail=document.getElementById('detail'), search=document.getElementById('search');
+function render(){
+ const q=search.value.toLowerCase();
+ const filtered=combos.filter(c=>c.name.toLowerCase().includes(q) || c.heroes.join(' ').toLowerCase().includes(q));
+ list.innerHTML=filtered.map((c,i)=>`
+  <div class="combo ${active===c.name?'active':''}" onclick="show('${c.name.replace(/'/g,"\\'")}')">
+   <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(c.heroes[0])}&background=${c.tier.includes('S+')?'FFD36A':'1A1A2E'}&color=${c.tier.includes('S+')?'000':'FFD36A'}">
+   <div style="flex:1"><div style="display:flex;gap:4px;align-items:center"><b style="font-size:11px">${c.name}</b><span class="tag ${c.tier.includes('S+')?'tierSPlus':c.tier.includes('S')?'tierS':''}">${c.tier}</span></div><small style="opacity:.6;font-size:9px">${c.heroes.slice(0,4).join(', ')}</small></div>
+   <span style="margin-left:auto" onclick="event.stopPropagation();toggleFav('${c.name.replace(/'/g,"\\'")}')">${fav.includes(c.name)?'⭐':'☆'}</span>
+  </div>`).join('');
+ document.getElementById('favCount').innerText=fav.length;
+}
+window.filterTag=(t)=>{search.value=t;render();}
+window.toggleFav=(n)=>{ if(fav.includes(n)) fav=fav.filter(x=>x!==n); else fav.push(n); localStorage.setItem('mcgg_fav',JSON.stringify(fav)); render(); if(active===n) show(n); }
+window.showFav=()=>{ const f=combos.filter(c=>fav.includes(c.name)); if(!f.length){alert('Belum ada favorit');return;} list.innerHTML=f.map(c=>`<div class="combo active" onclick="show('${c.name.replace(/'/g,"\\'")}')"><img src="https://ui-avatars.com/api/?name=${encodeURIComponent(c.heroes[0])}&background=FFD36A&color=000"><div style="flex:1"><b style="font-size:11px">${c.name}</b></div><span>⭐</span></div>`).join(''); }
+window.show=(name)=>{
+ const c=combos.find(x=>x.name===name); active=name; render();
+ const chips=c.heroes.map(h=>`<span style="display:inline-flex;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);margin:2px;font-size:10px">${h}</span>`).join('');
+ const board=Array(32).fill(null).map((_,i)=>c.pos.includes(i)?`<div class="cell"><img src="https://ui-avatars.com/api/?name=${encodeURIComponent(c.heroes[i%c.heroes.length])}&background=FFD36A&color=000"></div>`:`<div class="cell" style="opacity:.18">.</div>`).join('');
+ detail.innerHTML=`<div style="display:flex;gap:10px;align-items:center"><img src="https://ui-avatars.com/api/?name=${encodeURIComponent(c.heroes[0])}&background=FFD36A&color=000" style="width:52px;height:52px;border-radius:14px"><div><h2 class="serif" style="font-size:18px">${c.name}</h2><div style="margin-top:4px"><span class="tag ${c.tier.includes('S+')?'tierSPlus':'tierS'}">${c.tier}</span><span class="tag">HD</span></div></div></div><div style="margin-top:10px">${chips}</div><div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px"><div style="padding:10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line)"><small style="opacity:.5">COMMANDER</small><b style="display:block;margin-top:3px;font-size:11px">${c.commander}</b></div><div style="padding:10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line)"><small style="opacity:.5">ITEM</small><b style="display:block;margin-top:3px;font-size:10px">${c.items}</b></div></div><div style="margin-top:10px"><div class="board">${board}</div><small style="opacity:.6;display:block;margin-top:6px">💡 ${c.desc}</small></div>`;
+};
+document.getElementById('videoInput').addEventListener('change',e=>{
+ const f=e.target.files[0]; if(!f) return;
+ const url=URL.createObjectURL(f);
+ document.getElementById('videoBg').src=url;
+ document.getElementById('videoBg').play();
+});
+window.exportPNG=async()=>{
+ if(!active){alert('Pilih combo dulu di kiri!');return;}
+ const el=document.getElementById('capture');
+ const canvas=await html2canvas(el,{backgroundColor:'#000',scale:3,useCORS:true,allowTaint:true});
+ const ctx=canvas.getContext('2d');
+ ctx.fillStyle='rgba(0,0,0,.6)'; ctx.fillRect(canvas.width-280,canvas.height-50,270,40);
+ ctx.fillStyle='#FFD36A'; ctx.font='bold 13px Inter'; ctx.fillText(document.getElementById('wmText').innerText||'ALDIANO HD',canvas.width-260,canvas.height-26);
+ const url=canvas.toDataURL('image/png');
+ const a=document.createElement('a'); a.href=url; a.download=`HD-25COMBO-${active.replace(/\s+/g,'-')}.png`; a.click();
+ document.getElementById('preview').innerHTML=`<img src="${url}" style="width:100%;border-radius:14px;margin-top:8px;border:1px solid var(--line)">`;
+};
+window.shareWA=()=>{ if(!active){alert('Pilih combo dulu');return;} window.open(`https://wa.me/6282278531491?text=${encodeURIComponent(active)}`); };
+let hdOn=true;
+window.toggleHD=()=>{
+ const v=document.getElementById('videoBg'), btn=document.getElementById('hdBtn');
+ hdOn=!hdOn;
+ if(hdOn){ v.style.filter='brightness(1.08) contrast(1.12) saturate(1.28)'; btn.innerText='🔆 HD ON'; }
+ else{ v.style.filter='brightness(.55) contrast(1.1) saturate(.9)'; btn.innerText='🌙 HD OFF'; }
+};
+let playing=false;
+window.toggleMusic=()=>{ const a=document.getElementById('bgMusic'); if(!playing){ a.volume=0.22; a.play().then(()=>playing=true).catch(()=>{});} else{ a.pause(); playing=false; } };
+document.getElementById('search').addEventListener('input',render);
+render();
+</script>
+</body>
+</html>
