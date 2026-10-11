@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REACTBOOST ULTRA • Animasi Super Keren</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#25D366;--neon:#d1f500;--pink:#ff006e;--blue:#3a86ff}
+body{background:#080b08;color:#111;font-family:'Space Grotesk';overflow-x:hidden;cursor:none}
+#bg{position:fixed;inset:0;background:#f6f8f5;z-index:-13}
+.aurora{position:fixed;inset:-80%;z-index:-12;filter:blur(110px) saturate(1.8);opacity:.5;pointer-events:none}
+.aurora b{position:absolute;width:65%;height:65%;border-radius:50%;mix-blend-mode:multiply;animation:au 26s infinite alternate}
+.aurora b:nth-child(1){background:radial-gradient(circle,#25D366,transparent 70%);top:0;left:0}
+.aurora b:nth-child(2){background:radial-gradient(circle,#3a86ff,transparent 70%);top:30%;left:50%;animation-delay:-7s}
+.aurora b:nth-child(3){background:radial-gradient(circle,#d1f500,transparent 70%);top:60%;left:10%;animation-delay:-13s}
+.aurora b:nth-child(4){background:radial-gradient(circle,#ff006e,transparent 70%);top:10%;left:65%;animation-delay:-3s}
+@keyframes au{0%{transform:translate(0,0) scale(1) rotate(0deg)}100%{transform:translate(20%,-15%) scale(1.4) rotate(120deg)}}
+canvas{position:fixed;inset:0;z-index:-11;pointer-events:none}
+#cursor{position:fixed;top:0;left:0;width:28px;height:28px;border:2px solid var(--green);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .1s, width .2s, height .2s;box-shadow:0 0 20px var(--green)}
+#cursor2{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 12px var(--green)}
+.nav{position:sticky;top:12px;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-radius:999px;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);border:1px solid rgba(0,0,0,.08);margin:0 auto;max-width:1120px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.logo{font-family:'Syne';font-weight:900;letter-spacing:-1px} .logo i{font-style:normal;color:var(--green)}
+.marquee{margin:16px 0;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06);padding:8px 0;background:rgba(255,255,255,.5)}
+.marquee div{display:inline-block;animation:mar 30s linear infinite;font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;opacity:.6}
+@keyframes mar{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.wrap{max-width:1120px;margin:0 auto;padding:0 14px 20px;display:grid;grid-template-columns:1.15fr .85fr;gap:16px} @media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.75));backdrop-filter:blur(24px);border:1px solid rgba(0,0,0,.07);border-radius:22px;padding:18px;box-shadow:0 15px 50px rgba(0,0,0,.06);transform-style:preserve-3d;transition:.4s cubic-bezier(.16,1,.3,1)}
+.card:hover{transform:translateY(-4px) perspective(1000px) rotateX(1deg);box-shadow:0 25px 70px rgba(0,0,0,.1)}
+h1{font-family:'Syne';font-size:clamp(30px,5vw,48px);line-height:.88;letter-spacing:-2px} h1 i{font-style:normal;background:linear-gradient(90deg,#25D366,#3a86ff,#d1f500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:hue 8s linear infinite}
+@keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+.input{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid rgba(0,0,0,.1);background:rgba(255,255,255,.8);font-family:'JetBrains Mono';font-size:12px;margin-top:8px;outline:none;transition:.25s} .input:focus{border-color:var(--green);box-shadow:0 0 0 4px #25D36622;transform:scale(1.01)}
+.emoji{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px} .emoji button{width:48px;height:48px;border-radius:14px;border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.9);font-size:22px;cursor:pointer;transition:.3s cubic-bezier(.16,1,.3,1)} .emoji button:hover{transform:translateY(-3px) scale(1.08)} .emoji button.on{background:var(--green);color:#fff;border-color:var(--green);transform:scale(1.15) translateY(-3px);box-shadow:0 10px 20px #25D36644;animation:pop .4s}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1.15)}}
+.btn{padding:13px 18px;border-radius:999px;border:none;font-family:'JetBrains Mono';font-weight:700;font-size:11px;cursor:pointer;transition:.3s} .btn.green{background:var(--green);color:#fff;width:100%;box-shadow:0 12px 25px #25D36644;position:relative;overflow:hidden} .btn.green::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:translateX(-100%);animation:shine 2.5s infinite} @keyframes shine{100%{transform:translateX(100%)}} .btn.green:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 15px 35px #25D36655}
+.qris{width:180px;height:180px;background:#fff;border:1px dashed #bbb;border-radius:18px;display:grid;place-items:center;margin:12px auto;text-align:center;font-family:'JetBrains Mono';font-size:10px;transition:.4s} .qris:hover{transform:rotate(1deg) scale(1.03)}
+.float{position:absolute;font-size:20px;pointer-events:none;animation:float 6s infinite ease-in-out}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(10deg)}}
+.reveal{opacity:0;transform:translateY(20px);animation:rv .8s cubic-bezier(.16,1,.3,1) forwards} @keyframes rv{to{opacity:1;transform:none}}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.6);backdrop-filter:blur(16px);display:none;place-items:center;padding:16px} .modal.show{display:grid} .modal .box{max-width:380px;width:100%;background:#fff;border-radius:22px;padding:20px;animation:pop2 .4s cubic-bezier(.16,1,.3,1)} @keyframes pop2{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+</style>
+</head>
+<body>
+<div id="bg"></div><div class="aurora"><b></b><b></b><b></b><b></b></div><canvas id="c"></canvas>
+<div id="cursor"></div><div id="cursor2"></div>
+<div style="position:fixed;top:80px;left:20%;pointer-events:none;z-index:-10" class="float">❤️</div><div style="position:fixed;top:60%;left:85%;pointer-events:none;z-index:-10;animation-delay:-1s" class="float">🔥</div><div style="position:fixed;top:40%;left:10%;pointer-events:none;z-index:-10;animation-delay:-2s" class="float">🎉</div>
+
+<div class="nav reveal"><div class="logo">REACTBOOST <i>• ULTRA ANIMASI</i></div><div style="display:flex;gap:8px"><div style="font-family:'JetBrains Mono';font-size:9px;padding:6px 10px;border-radius:999px;background:#e8f5e9;border:1px solid #25D36644" id="badge">Sisa Gratis: 5/5</div><button class="btn" style="background:#111;color:#fff;padding:8px 12px" onclick="document.getElementById('vip').classList.add('show')">VIP Rp5K ↗</button></div></div>
+
+<div class="marquee"><div>★ 100% AMAN • NO BOT • REAL REACTION • ANIMASI AURORA • 100 PARTIKEL • CURSOR NEON • TILT 3D • SUPER MODE • ★ 100% AMAN • NO BOT • REAL REACTION • ANIMASI AURORA • 100 PARTIKEL • CURSOR NEON • TILT 3D • SUPER MODE • </div></div>
+
+<div class="wrap">
+<div class="card reveal" style="animation-delay:.1s">
+<div style="font-family:'JetBrains Mono';font-size:9px;letter-spacing:1.5px;opacity:.5">● RESMI RILIS • V19 ULTRA ANIMASI • SIBOLGA</div>
+<h1 style="margin-top:8px">Bikin postingan<br>salurannya<br><i>ramai reaksi<br>REAL + ANIMASI!</i></h1>
+<p style="margin-top:10px;opacity:.6;font-size:13px;line-height:1.6">Sekarang ada animasi aurora 4 warna + partikel 100 + cursor neon + emoji floating. Bukan bot fake 800, tapi booster REAL yang ngajak manusia asli react. Aman & bisa dijual!</p>
+
+<div style="margin-top:16px">
+<div style="font-family:'JetBrains Mono';font-size:10px;opacity:.6">❶ TEMPEL LINK (icon 🔗 di bawah pesan saluran)</div>
+<input id="link" class="input" placeholder="https://whatsapp.com/channel/0029Va.../123">
+<div style="margin-top:12px;font-family:'JetBrains Mono';font-size:10px;opacity:.6">❷ PILIH EMOJI MAKS 5</div>
+<div class="emoji" id="emojiBox"><button onclick="pick(this)">❤️</button><button onclick="pick(this)">🔥</button><button onclick="pick(this)">👍</button><button onclick="pick(this)">🎉</button><button onclick="pick(this)">😍</button><button onclick="pick(this)">💯</button><button onclick="pick(this)">🙏</button><button onclick="pick(this)">👏</button></div>
+<div style="margin-top:12px;font-family:'JetBrains Mono';font-size:10px;opacity:.6">❸ PESAN AJAKAN VIRAL</div>
+<input id="msg" class="input" value="Info terbaru sudah rilis, jangan lupa kasih reaksi ya! 🔥">
+<div style="height:8px;background:#eee;border-radius:999px;margin-top:12px;overflow:hidden"><b id="bar" style="display:block;height:100%;width:0%;background:var(--green);transition:.4s"></b></div>
+<button id="go" class="btn green" style="margin-top:12px" onclick="gen()">✨ BIKIN LINK BOOSTER ULTRA →</button>
+</div>
+</div>
+
+<div class="card reveal" style="animation-delay:.2s">
+<b style="font-family:'Syne'">LIVE PREVIEW • REALTIME</b>
+<div style="margin-top:12px;border:1px solid #e5e5e5;border-radius:16px;overflow:hidden;background:#fff">
+<div style="padding:8px 12px;background:#f0f0f0;font-family:'JetBrains Mono';font-size:9px;display:flex;gap:6px"><i style="width:8px;height:8px;background:#ff5f57;border-radius:50%"></i><i style="width:8px;height:8px;background:#ffbd2e;border-radius:50%"></i><i style="width:8px;height:8px;background:#28ca42;border-radius:50%"></i><span style="margin-left:8px">reactboost.ultra</span></div>
+<div style="padding:12px">
+<div id="pMsg" style="background:#f6f6f6;border-radius:14px;padding:12px;font-size:13px">Info terbaru sudah rilis, jangan lupa kasih reaksi ya! 🔥</div>
+<div id="pEmoji" style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">Pilih emoji dulu</div>
+<div class="qris" id="qr">QR CODE<br>AKAN MUNCUL<br>DI SINI<br><br>Scan → langsung<br>buka pesan</div>
+<a id="open" href="#" target="_blank" style="display:block;text-align:center;background:#111;color:#fff;padding:11px;border-radius:999px;text-decoration:none;font-family:'JetBrains Mono';font-size:10px">BUKA PESAN SALURAN ↗</a>
+</div>
+</div>
+<div style="margin-top:12px;background:#e8f5e9;border:1px solid #25D36633;border-radius:14px;padding:12px;font-size:11px;line-height:1.6"><b>🔥 Cara biar viral REAL:</b> Share link booster + QR ini ke grup WA / story IG. Orang klik → langsung buka pesan saluran + highlight emoji pilihanmu → mereka tinggal tap react ASLI! Bukan bot!</div>
+</div>
+</div>
+
+<div class="modal" id="vip" onclick="if(event.target===this)this.classList.remove('show')">
+<div class="box" style="text-align:center">
+<b style="font-family:'Syne';font-size:22px">VIP UNLIMITED Rp5.000 🔥</b>
+<p style="opacity:.6;font-size:12px;margin-top:6px">Gratis 5x/hari. VIP bisa booster sepuasnya + animasi super!</p>
+<div class="qris" style="width:200px;height:200px;background:#fff url('https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020101021226670016COM.NOBUBU.WWW01189360050300000898240214537834567890120303UME51440014ID.CO.QRIS.WWW0215ID10243354567890303UME5204000053033605405000.055802ID5908ALDIANOZ6007SIBOLGA61052221162070703A016304') center/cover"></div>
+<div style="background:#f6f6f6;border-radius:12px;padding:10px;font-family:'JetBrains Mono';font-size:11px">QRIS Rp5.000<br><span style="opacity:.6">DANA / OVO / GoPay</span><br><b>ALDIANOZ STUDIO™</b></div>
+<button class="btn green" style="margin-top:12px" onclick="localStorage.setItem('vip','1');alert('VIP Aktif! Unlimited ♾️');location.reload()">Saya Sudah Bayar → Aktifkan VIP</button>
+</div>
+</div>
+
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');let W,H,P=[],mx=innerWidth/2,my=innerHeight/2;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();addEventListener('resize',R);
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${e.clientX-14}px,${e.clientY-14}px)`;cur2.style.transform=`translate(${e.clientX-3}px,${e.clientY-3}px)`});
+const cur=document.getElementById('cursor'),cur2=document.getElementById('cursor2');
+for(let i=0;i<100;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*0.4,vy:(Math.random()-.5)*0.4,r:Math.random()*1.3+0.2});
+(function L(){x.clearRect(0,0,W,H);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;const d=Math.hypot(mx-p.x,my-p.y);if(d<160){x.strokeStyle=`rgba(37,211,102,${(1-d/160)*0.18})`;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(mx,my);x.stroke()}x.fillStyle='rgba(0,0,0,.25)';x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fill()});requestAnimationFrame(L)})();
+let sel=[],used=parseInt(localStorage.getItem('used')||'0'),vip=localStorage.getItem('vip')==='1';
+function upd(){const p=vip?100:(used/5*100);document.getElementById('bar').style.width=p+'%';document.getElementById('badge').textContent=vip?'VIP UNLIMITED ♾️':`Sisa Gratis: ${5-used}/5`;if(!vip&&used>=5){document.getElementById('go').disabled=true;document.getElementById('go').textContent='LIMIT HABIS • BELI VIP Rp5K'}}upd();
+function pick(el){if(el.classList.contains('on')){el.classList.remove('on');sel=sel.filter(x=>x!==el.textContent)}else{if(sel.length>=5){alert('Maks 5 emoji!');return}el.classList.add('on');sel.push(el.textContent);cur.style.width='48px';cur.style.height='48px';setTimeout(()=>{cur.style.width='28px';cur.style.height='28px'},200)}document.getElementById('pEmoji').innerHTML=sel.map(e=>`<span style="background:#fff0f0;border:1px solid #ffc9c9;padding:5px 10px;border-radius:999px;animation:pop .3s">${e} 0</span>`).join('')||'<span style="opacity:.4">Pilih emoji dulu</span>'}
+document.getElementById('msg').addEventListener('input',e=>document.getElementById('pMsg').textContent=e.target.value);
+function gen(){const link=document.getElementById('link').value.trim();if(!link){alert('Tempel link pesan saluran dulu! (icon 🔗)');return}if(sel.length===0){alert('Pilih minimal 1 emoji!');return}if(!vip&&used>=5){document.getElementById('vip').classList.add('show');return}document.getElementById('open').href=link;document.getElementById('qr').innerHTML=`QR READY ✅<br><br><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(link)}" style="width:120px;height:120px;border-radius:12px"><br><br>${link.slice(0,28)}...`;if(!vip){used++;localStorage.setItem('used',used);upd()}alert('✅ LINK BOOSTER ULTRA BERHASIL!\n\nSekarang sebar link + QR ini. Orang klik langsung buka pesan saluran dan react REAL (bukan bot fake). 100% aman anti banned!')}
+document.querySelectorAll('.card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5;const py=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(1000px) rotateY(${px*8}deg) rotateX(${-py*8}deg) translateY(-4px)`});card.addEventListener('mouseleave',()=>card.style.transform='')});
+</script>
+</body>
+</html>
