@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALDIANOZ_ • 2X SUPER KEREN</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--neon:#d1f500;--pink:#ff006e;--blue:#3a86ff;--purple:#8338ec}
+body{background:#08080e;color:#fff;font-family:'Space Grotesk';overflow-x:hidden;cursor:none}
+#bg{position:fixed;inset:0;background:#08080e;z-index:-13}
+.aurora{position:fixed;inset:-85%;z-index:-12;filter:blur(130px) saturate(1.8);opacity:.65;pointer-events:none}
+.aurora b{position:absolute;width:70%;height:70%;border-radius:50%;mix-blend-mode:screen;animation:a 28s infinite alternate}
+.aurora b:nth-child(1){background:radial-gradient(circle,#ff006e,transparent 70%);top:0;left:0;animation-duration:26s}
+.aurora b:nth-child(2){background:radial-gradient(circle,#3a86ff,transparent 70%);top:30%;left:45%;animation-duration:32s;animation-delay:-7s}
+.aurora b:nth-child(3){background:radial-gradient(circle,#d1f500,transparent 70%);top:60%;left:10%;animation-duration:24s;animation-delay:-13s}
+.aurora b:nth-child(4){background:radial-gradient(circle,#8338ec,transparent 70%);top:10%;left:65%;animation-duration:30s;animation-delay:-3s}
+@keyframes a{0%{transform:translate(0,0) scale(1) rotate(0deg)}100%{transform:translate(24%,-18%) scale(1.45) rotate(180deg)}}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:-11}
+#cursor{position:fixed;top:0;left:0;width:28px;height:28px;border:2px solid var(--neon);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode: difference;transition:transform .12s ease, width .2s, height .2s;box-shadow:0 0 20px var(--neon)}
+#cursor2{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--neon);border-radius:50%;pointer-events:none;z-index:9999;box-shadow:0 0 15px var(--neon)}
+.wrap{max-width:1050px;margin:0 auto;padding:14px}
+.nav{position:sticky;top:10px;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.08);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.logo{font-family:'Syne';font-weight:900;letter-spacing:-1px;font-size:18px} .logo span{color:var(--neon)}
+.pill{font-family:'JetBrains Mono';font-size:9px;background:#fff;color:#111;padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:700;transition:.2s}
+.pill:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,255,255,.5)}
+.marquee{margin:14px 0;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:8px 0;background:rgba(255,255,255,.02)}
+.marquee div{display:inline-block;animation:mar 30s linear infinite;font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;opacity:.6}
+@keyframes mar{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:14px} @media(max-width:800px){.hero{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.025));backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.13);border-radius:28px;padding:22px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:.4s}
+.card::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.3),transparent,rgba(209,245,0,.4));-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+h1{font-family:'Syne';font-size:clamp(34px,6.5vw,62px);line-height:.88;letter-spacing:-2.5px} h1 i{font-style:normal;background:linear-gradient(90deg,#ff006e,#3a86ff,#d1f500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:hue 6s infinite linear}
+@keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+.sub{margin-top:12px;opacity:.65;font-size:13.5px;line-height:1.65}
+.stats{display:flex;gap:10px;margin-top:16px} .st{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:12px;text-align:center;transition:.3s} .st:hover{transform:translateY(-3px);border-color:var(--neon)}
+.st b{font-family:'Syne';font-size:22px;display:block} .st small{font-size:9px;opacity:.5;letter-spacing:1.2px}
+.avatar{width:100%;aspect-ratio:1/1;border-radius:22px;overflow:hidden;padding:3px;background:conic-gradient(from 0deg,#ff006e,#3a86ff,#d1f500,#ff006e);animation:rot 4s linear infinite} @keyframes rot{to{transform:rotate(360deg)}} .avatar>div{width:100%;height:100%;border-radius:19px;overflow:hidden;background:#111;transform:rotate(0deg);animation:rot2 4s linear infinite reverse} @keyframes rot2{to{transform:rotate(-360deg)}} .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.reel{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 2px;margin-top:14px} .reel::-webkit-scrollbar{display:none} .reel .ri{flex:0 0 220px;scroll-snap-align:start;height:300px;border-radius:20px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.12)} .reel .ri img{width:100%;height:100%;object-fit:cover;transition:.7s} .reel .ri:hover img{transform:scale(1.12)}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 12px} .filter button{padding:9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-family:'JetBrains Mono';font-size:10px;cursor:pointer;transition:.2s} .filter button.active,.filter button:hover{background:var(--neon);color:#111;border-color:var(--neon);box-shadow:0 0 18px var(--neon)}
+.grid{columns:3 260px;column-gap:12px} @media(max-width:600px){.grid{columns:2 140px}}
+.item{break-inside:avoid;margin-bottom:12px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);position:relative;cursor:pointer;transition:.45s cubic-bezier(.16,1,.3,1)} .item:hover{transform:translateY(-8px) scale(1.02) rotateZ(.5deg);border-color:rgba(209,245,0,.6);box-shadow:0 25px 60px rgba(0,0,0,.6), 0 0 30px rgba(209,245,0,.2)}
+.item img{width:100%;display:block;transition:.7s} .item:hover img{transform:scale(1.1) rotate(.5deg)}
+.meta{position:absolute;inset:auto 0 0 0;padding:12px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.92))}
+.tag{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);padding:4px 9px;border-radius:999px;font-family:'JetBrains Mono';font-size:8px}
+#light{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);backdrop-filter:blur(22px);display:none;place-items:center;padding:20px} #light.show{display:grid} #light img{max-width:92vw;max-height:84vh;border-radius:18px;box-shadow:0 30px 100px rgba(0,0,0,.9)}
+.reveal{opacity:0;transform:translateY(22px);animation:rv .8s cubic-bezier(.16,1,.3,1) forwards} @keyframes rv{to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="bg"></div><div class="aurora"><b></b><b></b><b></b><b></b></div><canvas id="c"></canvas>
+<div id="cursor"></div><div id="cursor2"></div>
+
+<div class="wrap">
+<div class="nav"><div class="logo">ALDIANOZ<span>_</span></div><div style="display:flex;gap:8px"><a class="pill" id="superBtn" href="#" onclick="document.body.classList.toggle('SUPER');this.textContent=document.body.classList.contains('SUPER')?'NORMAL MODE':'⚡ SUPER MODE';return false">⚡ SUPER MODE</a><a class="pill" style="background:var(--neon)" href="https://wa.me/6281234567890" target="_blank">WA ↗</a></div></div>
+
+<div class="marquee"><div>★ DKV DESIGNER FROM SIBOLGA ★ 18 KARYA TERKURASI ★ 1 FILE HTML ★ 100 PARTIKEL ★ AURORA 4 WARNA ★ TILT 3D ★ LIGHTBOX CINEMATIC ★ FILTER KATEGORI ★ ★ DKV DESIGNER FROM SIBOLGA ★ 18 KARYA TERKURASI ★ 1 FILE HTML ★ 100 PARTIKEL ★ AURORA 4 WARNA ★ TILT 3D ★ LIGHTBOX CINEMATIC ★ FILTER KATEGORI ★</div></div>
+
+<div class="hero">
+<div class="card reveal" style="animation-delay:.05s">
+<div style="font-family:'JetBrains Mono';font-size:9px;letter-spacing:2px;opacity:.5">● 2X SUPER • 2026 • SIBOLGA</div>
+<h1 style="margin-top:8px">PORTFOLIO<br><i>2X SUPER</i><br>KEREN.</h1>
+<div class="sub">Versi 2x lebih keren: ada reel horizontal kayak IG, marquee jalan, cursor neon ngikutin mouse, dan super mode yang bikin warna meledak! Semua karya DKV & Web dalam 1 file.</div>
+<div class="stats"><div class="st"><b id="n1">0</b><small>KARYA</small></div><div class="st"><b>2X</b><small>SUPER KEREN</small></div><div class="st"><b>1 FILE</b><small>HTML ONLY</small></div></div>
+<div class="reel">
+<div class="ri"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400"></div>
+<div class="ri"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400"></div>
+<div class="ri"><img src="https://images.unsplash.com/photo-1626785774573-6dd65b279390?w=400"></div>
+<div class="ri"><img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=400"></div>
+<div class="ri"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400"></div>
+</div>
+<div class="filter" id="filter"><button class="active" data-f="all">SEMUA 18</button><button data-f="web">WEB</button><button data-f="dkv">DKV</button><button data-f="foto">FOTO</button><button data-f="logo">LOGO</button></div>
+</div>
+
+<div class="card reveal" style="animation-delay:.2s;padding:0">
+<div class="avatar"><div><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600"></div></div>
+<div style="padding:14px"><div style="font-family:'Syne';font-weight:800;font-size:18px">Aldianoz_</div><div style="font-size:11px;opacity:.6;line-height:1.5">Sibolga • DKV • Web Designer<br>Spesialis Website 1 File Ultra Keren</div>
+<div style="display:flex;gap:8px;margin-top:12px"><a class="pill" style="flex:1;text-align:center;background:#fff" href="https://instagram.com/aldianoz_" target="_blank">IG 📸</a><a class="pill" style="flex:1;text-align:center;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15)" href="#" onclick="navigator.clipboard.writeText(location.href);alert('Link tercopy!');return false">COPY LINK 🔗</a></div></div>
+</div>
+</div>
+
+<div class="grid" id="grid" style="margin-top:14px">
+<div class="item reveal" data-f="dkv" style="animation-delay:.1s"><span class="tag">DKV POSTER</span><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600"><div class="meta"><b>NEON POSTER CYBER</b><br><small style="opacity:.7;font-size:9px">Sibolga • 2026</small></div></div>
+<div class="item reveal" data-f="web" style="animation-delay:.15s"><span class="tag">WEB ULTRA</span><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600"><div class="meta"><b>TOKO ONLINE V6</b><br><small style="opacity:.7;font-size:9px">QRIS + Admin Panel</small></div></div>
+<div class="item reveal" data-f="logo" style="animation-delay:.2s"><span class="tag">LOGO BRAND</span><img src="https://images.unsplash.com/photo-1626785774573-6dd65b279390?w=600"><div class="meta"><b>BRAND IKAN SIBOLGA</b><br><small style="opacity:.7;font-size:9px">Logo • Packaging</small></div></div>
+<div class="item reveal" data-f="foto" style="animation-delay:.25s"><span class="tag">FOTO NIGHT</span><img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600"><div class="meta"><b>SIBOLGA NIGHT CITY</b><br><small style="opacity:.7;font-size:9px">Long Exposure</small></div></div>
+<div class="item reveal" data-f="web" style="animation-delay:.3s"><span class="tag">DASHBOARD</span><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"><div class="meta"><b>ADMIN DASHBOARD V5</b><br><small style="opacity:.7;font-size:9px">Chart + Data Viz</small></div></div>
+<div class="item reveal" data-f="dkv" style="animation-delay:.35s"><span class="tag">ILLUSTRATION</span><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600"><div class="meta"><b>CYBER CHARACTER</b><br><small style="opacity:.7;font-size:9px">Illustration</small></div></div>
+<div class="item reveal" data-f="logo" style="animation-delay:.4s"><span class="tag">MINIMAL LOGO</span><img src="https://images.unsplash.com/photo-1626785774625-2b1c7b3d3a4f?w=600"><div class="meta"><b>MINIMAL LOGO SET</b><br><small style="opacity:.7;font-size:9px">3 Concepts</small></div></div>
+<div class="item reveal" data-f="web" style="animation-delay:.45s"><span class="tag">MOBILE UI</span><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600"><div class="meta"><b>MOBILE APP UI</b><br><small style="opacity:.7;font-size:9px">Figma to HTML</small></div></div>
+<div class="item reveal" data-f="foto" style="animation-delay:.5s"><span class="tag">DRONE SHOT</span><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600"><div class="meta"><b>PANTAI SIBOLGA DRONE</b><br><small style="opacity:.7;font-size:9px">Aerial View</small></div></div>
+<div class="item reveal" data-f="dkv" style="animation-delay:.55s"><span class="tag">EVENT POSTER</span><img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600"><div class="meta"><b>MUSIC FEST POSTER</b><br><small style="opacity:.7;font-size:9px">Typography</small></div></div>
+<div class="item reveal" data-f="web" style="animation-delay:.6s"><span class="tag">BIO LINK</span><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600"><div class="meta"><b>BIO LINK V10 ANIMASI</b><br><small style="opacity:.7;font-size:9px">Linktree Killer</small></div></div>
+<div class="item reveal" data-f="foto" style="animation-delay:.65s"><span class="tag">PRODUCT FOTO</span><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"><div class="meta"><b>STREETWEAR SHOOT</b><br><small style="opacity:.7;font-size:9px">Product Photo</small></div></div>
+<div class="item reveal" data-f="logo" style="animation-delay:.7s"><span class="tag">PACKAGING</span><img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600"><div class="meta"><b>PACKAGING UMKM</b><br><small style="opacity:.7;font-size:9px">Ikan Sibolga</small></div></div>
+<div class="item reveal" data-f="dkv" style="animation-delay:.75s"><span class="tag">TYPOGRAPHY</span><img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=600"><div class="meta"><b>TYPE EXPERIMENT</b><br><small style="opacity:.7;font-size:9px">Syne Font</small></div></div>
+<div class="item reveal" data-f="web" style="animation-delay:.8s"><span class="tag">E-COMMERCE</span><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600"><div class="meta"><b>SHOPIFY 1 FILE</b><br><small style="opacity:.7;font-size:9px">Ultra Store</small></div></div>
+<div class="item reveal" data-f="dkv" style="animation-delay:.85s"><span class="tag">FILM POSTER</span><img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600"><div class="meta"><b>CYBERPUNK POSTER</b><br><small style="opacity:.7;font-size:9px">Movie Concept</small></div></div>
+<div class="item reveal" data-f="foto" style="animation-delay:.9s"><span class="tag">PORTRAIT</span><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600"><div class="meta"><b>PEOPLE OF SIBOLGA</b><br><small style="opacity:.7;font-size:9px">Human Interest</small></div></div>
+<div class="item reveal" data-f="web" style="animation-delay:.95s"><span class="tag">V12 ULTRA</span><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"><div class="meta"><b>LINKTREE V12 10X</b><br><small style="opacity:.7;font-size:9px">Super Animasi</small></div></div>
+</div>
+<div style="text-align:center;margin:22px 0;padding:14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-family:'JetBrains Mono';font-size:9px;opacity:.5">2X SUPER KEREN • 18 KARYA • CURSOR NEON • MARQUEE • REEL • TILT 3D • SUPER MODE • SIBOLGA 2026</div>
+</div>
+<div id="light" onclick="this.classList.remove('show')"><img id="lightImg"></div>
+<style>.SUPER .aurora{filter:blur(60px) saturate(3);opacity:1}.SUPER .card{border-color:var(--neon);box-shadow:0 0 40px rgba(209,245,0,.3)} .SUPER h1 i{animation:hue .8s infinite linear}</style>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');let W,H,P=[],mx=innerWidth/2,my=innerHeight/2;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();addEventListener('resize',R);
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${e.clientX-14}px,${e.clientY-14}px)`;cur2.style.transform=`translate(${e.clientX-3}px,${e.clientY-3}px)`});
+const cur=document.getElementById('cursor'),cur2=document.getElementById('cursor2');
+for(let i=0;i<90;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*0.5,vy:(Math.random()-.5)*0.5,r:Math.random()*1.5+0.3});
+(function L(){x.clearRect(0,0,W,H);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;const d=Math.hypot(mx-p.x,my-p.y);if(d<180){x.strokeStyle=`rgba(209,245,0,${(1-d/180)*0.2})`;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(mx,my);x.stroke()}x.fillStyle='#fff';x.globalAlpha=.4;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fill()});requestAnimationFrame(L)})();
+let n=0,s=setInterval(()=>{n++;document.getElementById('n1').textContent=n;if(n>=18)clearInterval(s)},40);
+document.querySelectorAll('#filter button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#filter button').forEach(z=>z.classList.remove('active'));b.classList.add('active');const f=b.dataset.f;document.querySelectorAll('.item').forEach(it=>it.style.display=(f==='all'||it.dataset.f===f)?'':'none')}))
+const Lb=document.getElementById('light'),Li=document.getElementById('lightImg');document.querySelectorAll('.item img,.reel img').forEach(img=>img.addEventListener('click',()=>{Li.src=img.src.replace('w=600','w=1600').replace('w=400','w=1600');Lb.classList.add('show');cur.style.transform+=' scale(1.5)'}));addEventListener('keydown',e=>{if(e.key==='Escape')Lb.classList.remove('show')});
+document.querySelectorAll('.card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5;const py=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(1000px) rotateY(${px*10}deg) rotateX(${-py*10}deg) translateY(-5px)`});card.addEventListener('mouseleave',()=>{card.style.transform=''})});
+document.querySelectorAll('.item').forEach(it=>{it.addEventListener('mouseenter',()=>{cur.style.width='50px';cur.style.height='50px';cur.style.transform+=' scale(1.2)'});it.addEventListener('mouseleave',()=>{cur.style.width='28px';cur.style.height='28px'})});
+</script>
+</body>
+</html>
