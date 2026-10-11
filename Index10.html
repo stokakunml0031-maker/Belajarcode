@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPEK HP ALL | Katalog Smartphone</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080d19;--panel:#111a2b;--text:#f5f7ff;--muted:#9baac3;--blue:#5488ff;--line:#25334b}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{padding:25px 6%;background:linear-gradient(120deg,#142c55,#111827 65%,#25194c);border-bottom:1px solid var(--line)}
+nav{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.logo{font-size:24px;font-weight:900;letter-spacing:1px}
+.logo span{color:#70a0ff}
+nav a{color:white;text-decoration:none;margin-left:16px;font-size:14px}
+.hero{padding:55px 0 35px;max-width:850px}
+.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.1;margin-bottom:18px}
+.hero h1 span{color:#70a0ff}
+.hero p{color:#c0cce0;line-height:1.8}
+.badges{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.badges span{padding:8px 12px;border:1px solid #45608c;border-radius:30px;font-size:12px}
+main{max-width:1400px;margin:auto;padding:30px 5%}
+.toolbar{display:grid;grid-template-columns:1fr 220px;gap:12px;margin-bottom:15px}
+input,select{width:100%;padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:white;font-size:14px;outline:none}
+input:focus,select:focus{border-color:var(--blue)}
+.brands{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0 25px}
+.brands button,.action{border:1px solid var(--line);background:var(--panel);color:white;padding:10px 15px;border-radius:10px;cursor:pointer}
+.brands button.active,.brands button:hover{background:var(--blue);border-color:var(--blue)}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.section-head h2{font-size:24px}
+#count{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:#587fc7}
+.phone-art{height:155px;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle at 50% 20%,#293d69,#121b2d 70%);position:relative}
+.phone{height:120px;width:65px;border:3px solid #a8b7d4;border-radius:15px;background:linear-gradient(145deg,#344a70,#080c15);box-shadow:0 10px 25px #0008;position:relative}
+.phone:before{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);width:22px;height:5px;background:#070b13;border-radius:8px}
+.lens{position:absolute;width:14px;height:14px;border:2px solid #90a9d5;background:#17243d;border-radius:50%;top:14px;left:8px;box-shadow:19px 0 #263d61,0 19px #263d61,19px 19px #263d61}
+.art-label{position:absolute;bottom:10px;left:12px;font-size:10px;letter-spacing:2px;color:#c8d8ff}
+.card-content{padding:16px}
+.brand{font-size:11px;color:#8eafff;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.card h3{font-size:17px;line-height:1.4;min-height:45px}
+.price{color:#77a4ff;font-weight:bold;font-size:19px;margin:13px 0}
+.spec-mini{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
+.spec-mini div{background:#0a1221;padding:9px;border-radius:8px}
+.spec-mini small{display:block;color:var(--muted);font-size:10px;margin-bottom:4px}
+.spec-mini strong{font-size:12px}
+.buttons{display:flex;gap:8px}
+.action{flex:1;padding:10px 5px;font-size:12px}
+.action.primary{background:#3267db;border-color:#3267db}
+.action.selected{background:#176d50;border-color:#176d50}
+.notice{background:#111a2b;border:1px solid var(--line);border-radius:12px;padding:15px;color:#b8c7dd;font-size:12px;line-height:1.8;margin:25px 0}
+footer{text-align:center;padding:35px 15px;color:var(--muted);border-top:1px solid var(--line);font-size:13px;line-height:2}
+dialog{background:#111a2b;color:white;border:1px solid #405579;border-radius:18px;padding:25px;width:min(600px,92vw);max-height:85vh;overflow:auto;margin:auto}
+dialog::backdrop{background:#000b;backdrop-filter:blur(5px)}
+.modal-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
+.close{background:#26344c;color:white;border:0;border-radius:9px;padding:9px 13px;cursor:pointer}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.detail{background:#0a1221;padding:12px;border-radius:9px}
+.detail small{color:var(--muted);display:block;margin-bottom:6px}
+.detail strong{font-size:13px;line-height:1.5}
+#comparePanel{margin-top:25px;display:none;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:420px;margin-top:15px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}
+th{color:#91b3ff}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:1fr}.hero{padding-top:38px}nav a{margin-left:8px}}
+@media(max-width:430px){.grid{grid-template-columns:1fr 1fr;gap:9px}.card-content{padding:11px}.card h3{font-size:14px}.price{font-size:15px}.spec-mini{gap:5px}.spec-mini div{padding:7px}.spec-mini strong{font-size:10px}.action{font-size:10px}.phone-art{height:130px}}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo">SPEK HP <span>ALL.</span></div>
+    <div>
+      <a href="#katalog">Katalog</a>
+      <a href="#perbandingan">Bandingkan</a>
+    </div>
+  </nav>
+  <section class="hero">
+    <h1>Temukan HP <span>Impianmu.</span></h1>
+    <p>Jelajahi smartphone berbagai merek, cek perkiraan harga, bandingkan spesifikasi, dan pilih HP yang sesuai dengan kebutuhanmu.</p>
+    <div class="badges">
+      <span>📱 Berbagai Merek</span>
+      <span>💰 Harga Rupiah</span>
+      <span>⚡ Perbandingan HP</span>
+      <span>🔎 Pencarian Cepat</span>
+    </div>
+  </section>
+</header>
+
+<main id="katalog">
+  <div class="toolbar">
+    <input id="search" placeholder="🔎 Cari nama HP, chipset, atau merek..." />
+    <select id="sort">
+      <option value="default">Urutan: Rekomendasi</option>
+      <option value="low">Harga termurah</option>
+      <option value="high">Harga termahal</option>
+      <option value="name">Nama A–Z</option>
+    </select>
+  </div>
+
+  <div class="brands" id="brands"></div>
+
+  <div class="section-head">
+    <h2>📱 Katalog Smartphone</h2>
+    <span id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="notice">
+    <strong>Catatan harga dan spesifikasi</strong><br>
+    Harga yang tertera adalah perkiraan untuk pasar Indonesia, bukan harga real-time. Harga aktual dapat berbeda menurut toko, varian RAM/penyimpanan, promo, garansi resmi atau distributor, serta kondisi barang. Spesifikasi pada katalog merupakan ringkasan dan beberapa detail dapat berbeda menurut varian regional. Periksa informasi resmi sebelum membeli.
+  </div>
+
+  <section id="perbandingan">
+    <div id="comparePanel"></div>
+  </section>
+</main>
+
+<dialog id="modal">
+  <div class="modal-top">
+    <h2 id="modalTitle">Detail HP</h2>
+    <button class="close" onclick="modal.close()">✕ Tutup</button>
+  </div>
+  <div id="modalBody"></div>
+</dialog>
+
+<footer>
+  <strong>SPEK HP ALL.</strong><br>
+  Katalog informasi smartphone untuk membantu kamu memilih perangkat.<br>
+  Bukan toko resmi dan tidak memproses pembelian.<br>
+  © 2026 SPEK HP ALL
+</footer>
+
+<script>
+const phones = [
+{
+brand:"Samsung",name:"Samsung Galaxy S25 Ultra",price:19999000,
+screen:'6,9 inci AMOLED QHD+ 120Hz',chip:'Snapdragon 8 Elite',ram:'12 GB',storage:'256 GB–1 TB',
+camera:'200 MP + ultrawide + telefoto',battery:'5.000 mAh',charge:'45W kabel',os:'Android / One UI',network:'5G',
+extra:'S Pen, kamera zoom, fitur Galaxy AI'
+},
+{
+brand:"Samsung",name:"Samsung Galaxy S25+",price:15999000,
+screen:'6,7 inci AMOLED QHD+ 120Hz',chip:'Snapdragon 8 Elite',ram:'12 GB',storage:'256–512 GB',
+camera:'50 MP + ultrawide + telefoto',battery:'4.900 mAh',charge:'45W kabel',os:'Android / One UI',network:'5G',
+extra:'Galaxy AI, layar premium'
+},
+{
+brand:"Samsung",name:"Samsung Galaxy S25",price:12999000,
+screen:'6,2 inci AMOLED 120Hz',chip:'Snapdragon 8 Elite',ram:'12 GB',storage:'128–512 GB',
+camera:'50 MP + ultrawide + telefoto',battery:'4.000 mAh',charge:'25W kabel',os:'Android / One UI',network:'5G',
+extra:'Desain ringkas, Galaxy AI'
+},
+{
+brand:"Samsung",name:"Samsung Galaxy A56 5G",price:5999000,
+screen:'6,7 inci Super AMOLED 120Hz',chip:'Exynos 1580',ram:'8–12 GB',storage:'128–256 GB',
+camera:'50 MP + ultrawide + makro',battery:'5.000 mAh',charge:'45W kabel',os:'Android / One UI',network:'5G',
+extra:'Tahan air IP67, dukungan pembaruan panjang'
+},
+{
+brand:"Samsung",name:"Samsung Galaxy A36 5G",price:4999000,
+screen:'6,7 inci Super AMOLED 120Hz',chip:'Snapdragon 6 Gen 3',ram:'8 GB',storage:'128–256 GB',
+camera:'50 MP + ultrawide + makro',battery:'5.000 mAh',charge:'45W kabel',os:'Android / One UI',network:'5G',
+extra:'Layar AMOLED, tahan air IP67'
+},
+{
+brand:"Samsung",name:"Samsung Galaxy A26 5G",price:3999000,
+screen:'6,7 inci Super AMOLED 120Hz',chip:'Exynos 1380',ram:'6–8 GB',storage:'128–256 GB',
+camera:'50 MP + ultrawide + makro',battery:'5.000 mAh',charge:'25W kabel',os:'Android / One UI',network:'5G',
+extra:'Layar AMOLED dan kamera utama OIS'
+},
+{
+brand:"Samsung",name:"Samsung Galaxy A16 5G",price:2999000,
+screen:'6,7 inci Super AMOLED',chip:'Dimensity 6300 / Exynos 1330*',ram:'4–8 GB',storage:'128–256 GB',
+camera:'50 MP + ultrawide + makro',battery:'5.000 mAh',charge:'25W kabel',os:'Android / One UI',network:'5G',
+extra:'Layar AMOLED, baterai besar'
+},
+{
+brand:"Apple",name:"iPhone 17 Pro Max",price:24999000,
+screen:'6,9 inci OLED ProMotion',chip:'Apple A19 Pro',ram:'12 GB*',storage:'256 GB–2 TB',
+camera:'Sistem kamera Fusion 48 MP',battery:'Baterai isi ulang',charge:'USB-C',os:'iOS',network:'5G',
+extra:'Face ID, Dynamic Island, MagSafe'
+},
+{
+brand:"Apple",name:"iPhone 17 Pro",price:21999000,
+screen:'6,3 inci OLED ProMotion',chip:'Apple A19 Pro',ram:'12 GB*',storage:'256 GB–1 TB',
+camera:'Sistem kamera Fusion 48 MP',battery:'Baterai isi ulang',charge:'USB-C',os:'iOS',network:'5G',
+extra:'Face ID, kamera Pro, MagSafe'
+},
+{
+brand:"Apple",name:"iPhone 17",price:16999000,
+screen:'6,3 inci OLED ProMotion',chip:'Apple A19',ram:'8 GB*',storage:'256–512 GB',
+camera:'Kamera Fusion 48 MP',battery:'Baterai isi ulang',charge:'USB-C',os:'iOS',network:'5G',
+extra:'Face ID, Dynamic Island'
+},
+{
+brand:"Apple",name:"iPhone 16 Pro Max",price:19999000,
+screen:'6,9 inci OLED 120Hz',chip:'Apple A18 Pro',ram:'8 GB',storage:'256 GB–1 TB',
+camera:'48 MP + ultrawide + telefoto',battery:'Baterai isi ulang',charge:'USB-C',os:'iOS',network:'5G',
+extra:'Face ID, kamera Pro, MagSafe'
+},
+{
+brand:"Apple",name:"iPhone 16",price:12999000,
+screen:'6,1 inci OLED',chip:'Apple A18',ram:'8 GB',storage:'128–512 GB',
+camera:'48 MP + ultrawide',battery:'Baterai isi ulang',charge:'USB-C',os:'iOS',network:'5G',
+extra:'Face ID, Apple Intelligence*'
+},
+{
+brand:"Apple",name:"iPhone 15",price:9999000,
+screen:'6,1 inci OLED',chip:'Apple A16 Bionic',ram:'6 GB',storage:'128–512 GB',
+camera:'48 MP + ultrawide',battery:'Baterai isi ulang',charge:'USB-C',os:'iOS',network:'5G',
+extra:'Dynamic Island, Face ID'
+},
+{
+brand:"Xiaomi",name:"Xiaomi 15 Ultra",price:16999000,
+screen:'6,73 inci AMOLED WQHD+ 120Hz',chip:'Snapdragon 8 Elite',ram:'16 GB',storage:'512 GB–1 TB',
+camera:'Sistem kamera Leica 50 MP+',battery:'6.000 mAh*',charge:'90W kabel*',os:'HyperOS',network:'5G',
+extra:'Kamera Leica, layar premium'
+},
+{
+brand:"Xiaomi",name:"Xiaomi 15",price:11999000,
+screen:'6,36 inci AMOLED 120Hz',chip:'Snapdragon 8 Elite',ram:'12 GB',storage:'256–512 GB',
+camera:'Tiga kamera 50 MP',battery:'5.240 mAh*',charge:'90W kabel*',os:'HyperOS',network:'5G',
+extra:'Kamera Leica, desain ringkas'
+},
+{
+brand:"Xiaomi",name:"Xiaomi 14T",price:5999000,
+screen:'6,67 inci AMOLED 144Hz',chip:'Dimensity 8300-Ultra',ram:'12 GB',storage:'256–512 GB',
+camera:'Kamera Leica 50 MP + lainnya',battery:'5.000 mAh',charge:'67W kabel',os:'HyperOS',network:'5G',
+extra:'Layar cepat, kamera Leica'
+},
+{
+brand:"Redmi",name:"Redmi Note 14 Pro+ 5G",price:5999000,
+screen:'6,67 inci AMOLED 120Hz',chip:'Snapdragon 7s Gen 3',ram:'8–12 GB',storage:'256–512 GB',
+camera:'200 MP + ultrawide + makro',battery:'5.110 mAh*',charge:'120W*',os:'HyperOS',network:'5G',
+extra:'Kamera resolusi tinggi, pengisian cepat'
+},
+{
+brand:"Redmi",name:"Redmi Note 14 Pro 5G",price:4499000,
+screen:'6,67 inci AMOLED 120Hz',chip:'Dimensity 7300-Ultra',ram:'8–12 GB',storage:'256–512 GB',
+camera:'200 MP + ultrawide + makro',battery:'5.110 mAh*',charge:'45W kabel*',os:'HyperOS',network:'5G',
+extra:'Layar AMOLED, kamera 200 MP'
+},
+{
+brand:"Redmi",name:"Redmi Note 14",price:2499000,
+screen:'6,67 inci AMOLED 120Hz',chip:'Helio G99-Ultra*',ram:'6–8 GB',storage:'128–256 GB',
+camera:'108 MP + kamera pendamping',battery:'5.500 mAh*',charge:'33W kabel*',os:'HyperOS',network:'4G',
+extra:'Layar AMOLED, baterai besar'
+},
+{
+brand:"POCO",name:"POCO F7 Ultra",price:10999000,
+screen:'6,67 inci AMOLED 120Hz',chip:'Snapdragon 8 Elite',ram:'12–16 GB',storage:'256–512 GB',
+camera:'50 MP + ultrawide + telefoto',battery:'5.300 mAh*',charge:'120W kabel*',os:'HyperOS',network:'5G',
+extra:'Performa flagship, layar cepat'
+},
+{
+brand:"POCO",name:"POCO X7 Pro",price:4999000,
+screen:'6,67 inci AMOLED 120Hz',chip:'Dimensity 8400-Ultra',ram:'8–12 GB',storage:'256–512 GB',
+camera:'50 MP OIS + ultrawide',battery:'6.000 mAh*',charge:'90W kabel',os:'HyperOS',network:'5G',
+extra:'Performa gaming, baterai besar'
+},
+{
+brand:"OPPO",name:"OPPO Find X8 Pro",price:15999000,
+screen:'6,78 inci AMOLED 120Hz',chip:'Dimensity 9400',ram:'16 GB',storage:'512 GB',
+camera:'Empat kamera 50 MP',battery:'5.910 mAh*',charge:'80W kabel',os:'ColorOS',network:'5G',
+extra:'Kamera telefoto, tahan air'
+},
+{
+brand:"OPPO",name:"OPPO Reno13 5G",price:7999000,
+screen:'6,59 inci AMOLED 120Hz',chip:'Dimensity 8350',ram:'12 GB',storage:'256–512 GB',
+camera:'50 MP OIS + ultrawide',battery:'5.600 mAh*',charge:'80W kabel',os:'ColorOS',network:'5G',
+extra:'Desain tipis, fitur AI'
+},
+{
+brand:"OPPO",name:"OPPO A5 Pro",price:3999000,
+screen:'6,67 inci LCD 90Hz*',chip:'Dimensity 6300*',ram:'8 GB',storage:'128–256 GB',
+camera:'50 MP + kamera pendamping',battery:'5.800 mAh*',charge:'45W kabel*',os:'ColorOS',network:'5G',
+extra:'Baterai besar, bodi tangguh'
+},
+{
+brand:"vivo",name:"vivo X200 Pro",price:16999000,
+screen:'6,78 inci AMOLED 120Hz',chip:'Dimensity 9400',ram:'16 GB',storage:'512 GB',
+camera:'50 MP + ultrawide + telefoto 200 MP',battery:'6.000 mAh*',charge:'90W kabel',os:'Funtouch OS',network:'5G',
+extra:'Kamera ZEISS, zoom jarak jauh'
+},
+{
+brand:"vivo",name:"vivo V50",price:6999000,
+screen:'6,77 inci AMOLED 120Hz',chip:'Snapdragon 7 Gen 3',ram:'8–12 GB',storage:'256–512 GB',
+camera:'50 MP OIS + ultrawide 50 MP',battery:'6.000 mAh',charge:'90W kabel',os:'Funtouch OS',network:'5G',
+extra:'Kamera ZEISS, baterai besar'
+},
+{
+brand:"vivo",name:"vivo Y29",price:2999000,
+screen:'6,68 inci LCD 120Hz*',chip:'Snapdragon 685*',ram:'6–8 GB',storage:'128–256 GB',
+camera:'50 MP + kamera pendamping',battery:'6.500 mAh*',charge:'44W kabel*',os:'Funtouch OS',network:'4G',
+extra:'Baterai besar, penggunaan harian'
+},
+{
+brand:"realme",name:"realme GT 7 Pro",price:11999000,
+screen:'6,78 inci AMOLED 120Hz',chip:'Snapdragon 8 Elite',ram:'12 GB',storage:'512 GB',
+camera:'50 MP + ultrawide + periskop',battery:'6.500 mAh*',charge:'120W kabel',os:'realme UI',network:'5G',
+extra:'Performa tinggi, kamera telefoto'
+},
+{
+brand:"realme",name:"realme 14 Pro+",price:5999000,
+screen:'6,83 inci AMOLED 120Hz',chip:'Snapdragon 7s Gen 3',ram:'8–12 GB',storage:'256–512 GB',
+camera:'50 MP OIS + periskop',battery:'6.000 mAh*',charge:'80W kabel',os:'realme UI',network:'5G',
+extra:'Kamera periskop, baterai besar'
+},
+{
+brand:"Infinix",name:"Infinix NOTE 50 Pro+",price:5999000,
+screen:'6,78 inci AMOLED 144Hz',chip:'Dimensity 8350 Ultimate',ram:'12 GB',storage:'256 GB',
+camera:'50 MP OIS + ultrawide + telefoto',battery:'5.200 mAh*',charge:'100W kabel*',os:'XOS',network:'5G',
+extra:'Layar cepat, fitur gaming'
+},
+{
+brand:"Infinix",name:"Infinix HOT 50 Pro+",price:2499000,
+screen:'6,78 inci AMOLED 120Hz',chip:'Helio G100',ram:'8 GB',storage:'256 GB',
+camera:'50 MP + kamera pendamping',battery:'5.000 mAh',charge:'33W kabel',os:'XOS',network:'4G',
+extra:'Layar AMOLED, harga terjangkau'
+},
+{
+brand:"Tecno",name:"TECNO CAMON 40 Pro 5G",price:3999000,
+screen:'6,78 inci AMOLED 144Hz',chip:'Dimensity 7300',ram:'8 GB',storage:'256 GB',
+camera:'50 MP OIS + ultrawide',battery:'5.200 mAh',charge:'45W kabel',os:'HiOS',network:'5G',
+extra:'Kamera portrait, layar cepat'
+},
+{
+brand:"ASUS",name:"ASUS ROG Phone 9",price:14999000,
+screen:'6,78 inci AMOLED hingga 185Hz',chip:'Snapdragon 8 Elite',ram:'12–16 GB',storage:'256–512 GB',
+camera:'50 MP OIS + ultrawide + makro',battery:'5.800 mAh',charge:'65W kabel',os:'Android / ROG UI',network:'5G',
+extra:'Fitur gaming, AirTrigger'
+},
+{
+brand:"Google",name:"Google Pixel 9 Pro",price:16999000,
+screen:'6,3 inci LTPO OLED 120Hz',chip:'Google Tensor G4',ram:'16 GB',storage:'128 GB–1 TB',
+camera:'50 MP + ultrawide + telefoto',battery:'4.700 mAh*',charge:'USB-C',os:'Android',network:'5G',
+extra:'Kamera komputasional, fitur AI'
+}
+];
+
+const brands = ["Semua", ...new Set(phones.map(p=>p.brand))];
+let activeBrand = "Semua";
+let selected = [];
+
+const rupiah = n => "Rp" + n.toLocaleString("id-ID");
+const grid = document.getElementById("grid");
+const search = document.getElementById("search");
+const sort = document.getElementById("sort");
+const modal = document.getElementById("modal");
+
+function renderBrands(){
+  document.getElementById("brands").innerHTML = brands.map(b =>
+    `<button class="${b===activeBrand?'active':''}" data-brand="${b}">${b}</button>`
+  ).join("");
+  document.querySelectorAll("[data-brand]").forEach(btn=>{
+    btn.onclick=()=>{activeBrand=btn.dataset.brand;renderBrands();render()};
+  });
+}
+
+function render(){
+  const q=search.value.toLowerCase().trim();
+  let list=phones.filter(p=>
+    (activeBrand==="Semua"||p.brand===activeBrand) &&
+    [p.name,p.brand,p.chip,p.screen,p.storage].join(" ").toLowerCase().includes(q)
+  );
+  if(sort.value==="low")list.sort((a,b)=>a.price-b.price);
+  if(sort.value==="high")list.sort((a,b)=>b.price-a.price);
+  if(sort.value==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"id"));
+
+  document.getElementById("count").textContent=list.length+" model ditemukan";
+
+  grid.innerHTML=list.map(p=>{
+    const i=phones.indexOf(p);
+    const isSelected=selected.includes(i);
+    return `<article class="card">
+      <div class="phone-art">
+        <div class="phone"><div class="lens"></div></div>
+        <span class="art-label">${p.brand.toUpperCase()}</span>
+      </div>
+      <div class="card-content">
+        <div class="brand">${p.brand}</div>
+        <h3>${p.name}</h3>
+        <div class="price">${rupiah(p.price)}</div>
+        <div class="spec-mini">
+          <div><small>CHIPSET</small><strong>${p.chip}</strong></div>
+          <div><small>LAYAR</small><strong>${p.screen.split(" ").slice(0,3).join(" ")}</strong></div>
+          <div><small>RAM</small><strong>${p.ram}</strong></div>
+          <div><small>BATERAI</small><strong>${p.battery}</strong></div>
+        </div>
+        <div class="buttons">
+          <button class="action primary" onclick="showDetail(${i})">Detail</button>
+          <button class="action ${isSelected?'selected':''}" onclick="toggleCompare(${i})">${isSelected?'✓ Dipilih':'+ Bandingkan'}</button>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+
+  if(!list.length)grid.innerHTML='<p>HP tidak ditemukan. Coba kata kunci lain.</p>';
+  renderCompare();
+}
+
+
+function showDetail(i){
+  const p=phones[i];
+  document.getElementById("modalTitle").textContent=p.name;
+  const fields=[
+    ["Merek",p.brand],["Harga perkiraan",rupiah(p.price)],
+    ["Layar",p.screen],["Chipset",p.chip],["RAM",p.ram],
+    ["Penyimpanan",p.storage],["Kamera",p.camera],
+    ["Baterai",p.battery],["Pengisian daya",p.charge],
+    ["Sistem operasi",p.os],["Jaringan",p.network],
+    ["Fitur unggulan",p.extra]
+  ];
+  document.getElementById("modalBody").innerHTML=
+    `<div class="price">${rupiah(p.price)}</div><div class="detail-grid">`+
+    fields.map(([k,v])=>`<div class="detail"><small>${k}</small><strong>${v}</strong></div>`).join("")+
+    `</div><p style="font-size:12px;color:#9baac3;line-height:1.7">*Sebagian spesifikasi dapat berbeda menurut varian atau wilayah. Periksa spesifikasi resmi sebelum membeli.</p>`;
+  modal.showModal();
+}
+
+function toggleCompare(i){
+  if(selected.includes(i)){
+    selected=selected.filter(x=>x!==i);
+  }else if(selected.length<2){
+    selected.push(i);
+  }else{
+    alert("Pilih maksimal dua HP untuk dibandingkan.");
+    return;
+  }
+  render();
+}
+
+function renderCompare(){
+  const panel=document.getElementById("comparePanel");
+  if(selected.length===0){
+    panel.style.display="none";
+    return;
+  }
+  panel.style.display="block";
+  const chosen=selected.map(i=>phones[i]);
+  let html=`<h2>⚖️ Perbandingan HP (${selected.length}/2)</h2>`;
+  if(chosen.length===1){
+    html+=`<p style="color:#aab8ce;margin-top:10px">Pilih satu HP lagi untuk membandingkan harga dan spesifikasinya.</p>`;
+  }
+  html+=`<table><thead><tr><th>Spesifikasi</th>${chosen.map(p=>`<th>${p.name}</th>`).join("")}</tr></thead><tbody>`;
+  const rows=[
+    ["Harga",p=>rupiah(p.price)],["Merek",p=>p.brand],
+    ["Layar",p=>p.screen],["Chipset",p=>p.chip],
+    ["RAM",p=>p.ram],["Penyimpanan",p=>p.storage],
+    ["Kamera",p=>p.camera],["Baterai",p=>p.battery],
+    ["Pengisian daya",p=>p.charge],["Sistem operasi",p=>p.os],
+    ["Jaringan",p=>p.network],["Fitur",p=>p.extra]
+  ];
+  html+=rows.map(([label,fn])=>`<tr><td>${label}</td>${chosen.map(p=>`<td>${fn(p)}</td>`).join("")}</tr>`).join("");
+  html+=`</tbody></table><button class="action" style="margin-top:15px" onclick="selected=[];render()">Hapus pilihan</button>`;
+  panel.innerHTML=html;
+}
+
+search.addEventListener("input",render);
+sort.addEventListener("change",render);
+renderBrands();
+render();
+</script>
+</body>
+</html>
